@@ -18,14 +18,11 @@ window.jQuery = $;
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-balham.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-alpine.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/ag-grid/23.1.1/styles/ag-theme-material.min.css">
-<link rel="stylesheet" type="text/css" href="css/style.css">
-<link rel="stylesheet" type="text/css" href="css/rangeslider.css">
-
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/tippy.js@6/dist/tippy.css"
-/>
+<link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css"/>
 <link rel="stylesheet" type="text/css" href="css/awn.css"></link>
+<link rel="stylesheet" type="text/css" href="css/rangeslider.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="stylesheet" type="text/css" href="" id="theme">
 </head>
 <body>
 <img class="darkModeToggle" style="display:none" id="darkModeToggle" src="./assets/elementdark.png"></img>
@@ -1522,7 +1519,7 @@ window.jQuery = $;
         <div class="toggleRow">
           <div class="switch">
             <input id="settingRageSet" type="checkbox" class="switch-input" />
-            <label for="settingRageSet" class="switch-label"></label>
+            <label for="settingRageSet" class="switch-label toggleSwitchColour"></label>
           </div>
           <div class="switchText">
             Use rage set bonus for damage optimization
@@ -1536,7 +1533,13 @@ window.jQuery = $;
           </div>
         </div>
 
-
+        <div class="dropdownRow">
+          <div class="panelLabel">
+            <div class="panelLabelText">Theme</div>
+          </div>
+          <select id="settingAppTheme" class="selectionDropdown"></select>
+        </div>
+		
         <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit">
         <text id="selectDefaultFolderSubmitOutputText">Select default folder</text>
 

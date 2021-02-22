@@ -1,0 +1,74 @@
+/* Dark Icons */
+.tooltipImage {
+  content:url('./../resources/app.asar/assets/tooltip.png');
+}
+img[src*='statatk'] {
+  content:url('./../resources/app.asar/assets/statatkdark.png');
+}
+img[src*='statatkpercent'] {
+  content:url('./../resources/app.asar/assets/statatkpercentdark.png');
+}
+img[src*='statdef'] {
+  content:url('./../resources/app.asar/assets/statdefdark.png');
+}
+img[src*='statdefpercent'] {
+  content:url('./../resources/app.asar/assets/statdefpercentdark.png');
+}
+img[src*='stathp'] {
+  content:url('./../resources/app.asar/assets/stathpdark.png');
+}
+img[src*='stathppercent'] {
+  content:url('./../resources/app.asar/assets/stathppercentdark.png');
+}
+img[src*='statspd'] {
+  content:url('./../resources/app.asar/assets/statspddark.png');
+}
+img[src*='statcr'] {
+  content:url('./../resources/app.asar/assets/statcrdark.png');
+}
+img[src*='statcd'] {
+  content:url('./../resources/app.asar/assets/statcddark.png');
+}
+img[src*='stateff'] {
+  content:url('./../resources/app.asar/assets/stateffdark.png');
+}
+img[src*='statres'] {
+  content:url('./../resources/app.asar/assets/statresdark.png');
+}
+img[src*='starlight'] {
+  content:url('./../resources/app.asar/assets/star.png');
+}
+img[src*='copylight'] {
+  content:url('./../resources/app.asar/assets/copy.png');
+}
+img[src*='editlight'] {
+  content:url('./../resources/app.asar/assets/edit.png');
+}
+img[src*='locklight'] {
+  content:url('./../resources/app.asar/assets/lock.png');
+}
+img[src*='reforgelight'] {
+  content:url('./../resources/app.asar/assets/reforge.png');
+}
+img[src*='trashlight'] {
+  content:url('./../resources/app.asar/assets/trash.png');
+}
+
+
+
+
+
+/* Misc Edits */
+.tab-panels {
+  padding-bottom: 10px;
+}
+
+.tab-panel {
+  padding: 2px 8px;
+}
+
+#heroes-section .reforgeSwitch .switch {
+  margin-top: 4px;
+  margin-left: 4px;
+  transform: translateY(1px);
+}

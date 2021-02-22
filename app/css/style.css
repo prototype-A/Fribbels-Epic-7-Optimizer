@@ -1144,6 +1144,13 @@ body.dark-theme input {
   margin-right: 10px
 }
 
+.dropdownRow {
+  margin-bottom: 8px;
+}
+.selectionDropdown {
+  width: 140px;
+}
+
 .statPreviewContainer {
   display:flex;
   flex-direction: column;

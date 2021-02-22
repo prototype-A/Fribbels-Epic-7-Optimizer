@@ -100,7 +100,8 @@
       "./resources/**"
     ],
     "extraFiles": [
-      "./data/**"
+      "./data/**",
+	  "./themes/**"
     ],
     "publish": {
       "provider": "github",

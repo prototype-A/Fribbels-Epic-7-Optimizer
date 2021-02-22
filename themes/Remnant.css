@@ -1,0 +1,299 @@
+/* App Background + (Most of) Text Colour */
+body {
+  background-color: #282236;
+  color: #ccc;
+}
+
+/* Tab Outline */
+.tabset > input:checked + label {
+  border-color: #aaa;
+  border-bottom: 1px solid #282236;
+  margin-bottom: -1px;
+}
+
+/* Tab Page Top Outline */
+.tab-panel {
+  border-top: 1px solid #aaa;
+}
+
+/* Tab Label "Underbar" In-Focus/Mouse Hover Accent Colour */
+.tabset > label:hover::after,
+.tabset > input:focus + label::after,
+.tabset > input:checked + label::after {
+  background-color: #8226d4;
+}
+
+/* Tab Label "Underbar" Out-of-Focus Accent Colour */
+.tabset > label::after {
+  background-color: #8d8d8d;
+}
+
+/* Button Colour + Text Colour */
+.gearPreviewButton,
+.gearActionButton,
+.gearTabButton {
+  background-color: #463e59;
+  border-color: #777;
+  color: #ccc;
+}
+
+/* Dropdown/Input/TextBox/Button/Pop-Up/Table Colour + Text Colour */
+.optionsExcludeGearFrom,
+.selectionDropdown,
+.settingsNumber,
+.optimizer-number-input,
+.stat-number-input,
+.sliderInput,
+.inputGearFilterSelect,
+.inputSetFilterSelect,
+#exportOutputText,
+.ms-choice,
+.ms-drop,
+.ag-theme-balham,
+.ag-header-viewport,
+.ag-header-cell-text,
+.ag-paging-panel,
+.ag-paging-panel span,
+.swal2-popup.swal2-modal.swal2-show,
+.swal2-popup.swal2-modal.swal2-icon-error.swal2-show,
+.swal2-popup.swal2-modal.swal2-icon-info.swal2-show,
+.bonusStatInput,
+.bonusStatInputPercent,
+.editGearStatLabel,
+.editGearStatSelect,
+.editGearStatNumber {
+  background-color: #463e59;
+  border-color: #666;
+  color: #ccc !important;
+}
+
+/* Nested Dropdown/Input/TextBox/Button/Table Background Colour + Text Colour */
+.ms-search,
+.ag-body-viewport,
+.ag-center-cols-container,
+.ag-floating-top {
+  background-color: #564c6e;
+  color: #ddd;
+}
+
+/* Hero Search Input */
+.ms-search > input {
+  background-color: #9786bf;
+}
+
+/* Heroes Tab Heroes Table Rows + Text Colour */
+#heroes-section .heroesTableContainer .ag-theme-balham .ag-row {
+  color: #ddd;
+}
+
+/* Non Stat Comparison-Related Table Text Colour */
+.optimization-results-panel .ag-theme-balham .ag-row div[aria-colindex='20'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='3'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='4'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='5'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='6'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='7'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='23'],
+.gearGridContainer .ag-theme-balham .ag-row div[aria-colindex='24'],
+.buildsTableContainer .ag-theme-balham .ag-row div[aria-colindex='1'],
+.buildsTableContainer .ag-theme-balham .ag-row div[aria-colindex='21'] {
+  color: #ddd;
+}
+
+/* Odd-Numbered Table Rows + Text Colour */
+.ag-theme-balham .ag-row:nth-child(odd) {
+  background-color: #564c6e;
+  color: #000;
+}
+
+/* Even-Numbered Table Rows + Text Colour */
+.ag-theme-balham .ag-row:nth-child(even) {
+  background-color: #62567d;
+  color: #000;
+}
+
+/* Table Row Selected */
+.ag-theme-balham .ag-row-selected:nth-child(odd),
+.ag-theme-balham .ag-row-selected:nth-child(even) {
+  background-color: #8071a3;
+}
+
+/* Table Row Mouse Hover */
+.ag-theme-balham .ag-row-hover:nth-child(odd),
+.ag-theme-balham .ag-row-hover:nth-child(even) {
+  background-color: #9786bf;
+}
+
+/* Dropdown Option Hover Colour */
+.ms-drop.bottom > ul > li:hover {
+  background-color: #9786bf;
+}
+
+/* Dropdown Option Selected Colour */
+.ms-drop.bottom > ul > selected,
+.ms-drop ul > li.hide-radio.selected {
+  background-color: #6f618f;
+}
+
+/* Icon Button Text Colour */
+.gearTabButtonLabel {
+  color: #ddd;
+}
+
+/* Slider "Handle" Colour */
+.rangeslider__handle {
+  background-color: #892cdb;
+}
+
+/* Slider "Handle" Hover Colour */
+.rangeslider__handle:hover {
+  background-color: #6c1eb3;
+}
+
+/* Slider "Handle" Clicked/Dragged Colour */
+.rangeslider__handle:active {
+  background-color: #5714a3;
+}
+
+/* Slider "Track" Accent Colour */
+.rangeslider__fill {
+  background-color: #7522bf;
+}
+
+/* Slider "Track" Colour */
+.rangeslider__fill__bg {
+  background-color: #444;
+}
+
+/* Toggle Switch Colour */
+.switch-label::after {
+  background-color: #eee;
+}
+
+/* Toggle Switch "Track" Colour */
+.switch-label::before {
+  background-color: #aaa;
+}
+
+/* Toggle Switch "Track" Accent Colour */
+.switch-input:checked + .switch-label::before {
+  background-color: #8226d4;
+}
+
+/* Notification Background Colour + Body Text Colour */
+.awn-toast.awn-toast-info,
+.awn-toast.awn-toast-label,
+.awn-toast.awn-toast-icon {
+  background-color: #b9a5e8;
+  color: #7320bd;
+}
+
+/* Notification Title Text Colour */
+.awn-toast-label {
+  color: #8226d4 !important;
+}
+
+/* Notification Icon Colour */
+.awn-toast.awn-toast-info .fa,
+.awn-toast.awn-toast-info b {
+  color: #641ba6;
+}
+
+/* Notification Border Colour */
+.awn-toast-wrapper {
+  border-color: #8d41d1 !important;
+}
+
+/* Notification Duration Bar */
+.awn-toast-progress-bar::after {
+  background-color: #8226d4 !important;
+}
+
+/* Pop-Up Text Colour */
+.swal2-content {
+  color: #aaa !important;
+}
+
+/* Pop-Up Ok Button Colour */
+.swal2-confirm.swal2-styled {
+  background-color: #8226d4 !important;
+}
+
+
+
+
+
+/* Light Icons */
+.tooltipImage {
+  content:url('./../resources/app.asar/assets/tooltiplight.png');
+}
+img[src*='statatkdark'] {
+  content:url('./../resources/app.asar/assets/statatk.png');
+}
+img[src*='statatkpercentdark'] {
+  content:url('./../resources/app.asar/assets/statatkpercent.png');
+}
+img[src*='statdefdark'] {
+  content:url('./../resources/app.asar/assets/statdef.png');
+}
+img[src*='statdefpercentdark'] {
+  content:url('./../resources/app.asar/assets/statdefpercent.png');
+}
+img[src*='stathpdark'] {
+  content:url('./../resources/app.asar/assets/stathp.png');
+}
+img[src*='stathppercentdark'] {
+  content:url('./../resources/app.asar/assets/stathppercent.png');
+}
+img[src*='statspddark'] {
+  content:url('./../resources/app.asar/assets/statspd.png');
+}
+img[src*='statcrdark'] {
+  content:url('./../resources/app.asar/assets/statcr.png');
+}
+img[src*='statcddark'] {
+  content:url('./../resources/app.asar/assets/statcd.png');
+}
+img[src*='stateffdark'] {
+  content:url('./../resources/app.asar/assets/stateff.png');
+}
+img[src*='statresdark'] {
+  content:url('./../resources/app.asar/assets/statres.png');
+}
+img[src*='star'] {
+  content:url('./../resources/app.asar/assets/starlight.png');
+}
+img[src*='copy'] {
+  content:url('./../resources/app.asar/assets/copylight.png');
+}
+img[src*='edit'] {
+  content:url('./../resources/app.asar/assets/editlight.png');
+}
+img[src*='lock'] {
+  content:url('./../resources/app.asar/assets/locklight.png');
+}
+img[src*='reforge'] {
+  content:url('./../resources/app.asar/assets/reforgelight.png');
+}
+img[src*='trash'] {
+  content:url('./../resources/app.asar/assets/trashlight.png');
+}
+
+
+
+
+
+/* Misc Edits */
+.tab-panels {
+  padding-bottom: 10px;
+}
+
+.tab-panel {
+  padding: 2px 8px;
+}
+
+#heroes-section .reforgeSwitch .switch {
+  margin-top: 4px;
+  margin-left: 4px;
+  transform: translateY(1px);
+}

@@ -36,6 +36,8 @@ global.DarkMode = require('./darkmode');
 global.GridRenderer = require('./renderer/gridRenderer');
 global.Updater = require('./updater');
 global.Settings = require('./settings');
+global.Themes = require('./themes');
+global.Languages = require('./languages');
 global.StatPreview = require('./statPreview');
 
 // Tab
@@ -109,6 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     OptimizerTab.initialize();
     OptimizerGrid.initialize();
     Tooltip.initialize();
+    Themes.initialize();
     Settings.initialize();
 
     Saves.loadAutoSave();

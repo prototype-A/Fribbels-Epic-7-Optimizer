@@ -16,13 +16,26 @@ module.exports = {
         const settingsIds = [
             'settingUnlockOnUnequip',
             'settingMaxResults',
-            'settingRageSet'
+            'settingRageSet',
+            'settingAppTheme'
         ];
 
         for (var id of settingsIds) {
             document.getElementById(id).addEventListener('change', (event) => {
                 module.exports.saveSettings();
+                if (event.target.id === settingsIds[3]) {
+                    Themes.setTheme(event.target.value);
+                } else if (event.target.id === settingsIds[4]) {
+                    Languages.setLanguage(event.target.value);
+                }
             });
+        }
+
+        const themeList = Themes.getThemeList();
+        for (var themeName of themeList) {
+            let themeOption = document.createElement('option')
+            themeOption.text = themeName;
+            document.getElementById(settingsIds[3]).add(themeOption);
         }
 
         document.getElementById('selectDefaultFolderSubmit').addEventListener("click", async () => {
@@ -58,6 +71,7 @@ module.exports = {
             settingUnlockOnUnequip: true,
             settingRageSet: true,
             settingMaxResults: 5_000_000,
+            settingAppTheme: Themes.getDefaultTheme(),
             defaultPath: defaultPath
         }
     },
@@ -74,6 +88,11 @@ module.exports = {
         if (settings.settingMaxResults) {
             document.getElementById('settingMaxResults').value = settings.settingMaxResults;
         }
+		
+        if (settings.settingAppTheme) {
+            document.getElementById('settingAppTheme').value = settings.settingAppTheme;
+            Themes.setTheme(settings.settingAppTheme);
+        }
 
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);
         Api.setSettings(settings);
@@ -85,10 +104,11 @@ module.exports = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
             settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000),
+            settingAppTheme: document.getElementById('settingAppTheme').value || module.exports.getDefaultSettings().settingAppTheme,
             settingDefaultPath: pathOverride ? pathOverride : defaultPath
         };
 
         Files.saveFile(Files.path(settingsPath), JSON.stringify(settings, null, 2))
         Api.setSettings(settings);
-    },
+    }
 }
