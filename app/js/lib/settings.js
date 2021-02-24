@@ -15,9 +15,10 @@ module.exports = {
 
         const settingsIds = [
             'settingUnlockOnUnequip',
-            'settingMaxResults',
             'settingRageSet',
-            'settingAppTheme'
+            'settingMaxResults',
+            'settingAppTheme',
+            'settingAppLanguage',
         ];
 
         for (var id of settingsIds) {
@@ -29,13 +30,6 @@ module.exports = {
                     Languages.setLanguage(event.target.value);
                 }
             });
-        }
-
-        const themeList = Themes.getThemeList();
-        for (var themeName of themeList) {
-            let themeOption = document.createElement('option')
-            themeOption.text = themeName;
-            document.getElementById(settingsIds[3]).add(themeOption);
         }
 
         document.getElementById('selectDefaultFolderSubmit').addEventListener("click", async () => {
@@ -60,6 +54,20 @@ module.exports = {
 
             Notifier.info(path);
         });
+
+        const themeList = Themes.getThemeList();
+        for (var themeName of themeList) {
+            let themeOption = document.createElement('option')
+            themeOption.text = themeName;
+            document.getElementById(settingsIds[3]).add(themeOption);
+        }
+
+        const langList = Languages.getLanguageList();
+        for (var langName of langList) {
+            let langOption = document.createElement('option')
+            langOption.text = langName;
+            document.getElementById(settingsIds[4]).add(langOption);
+        }
     },
 
     getDefaultPath: () => {
@@ -71,8 +79,9 @@ module.exports = {
             settingUnlockOnUnequip: true,
             settingRageSet: true,
             settingMaxResults: 5_000_000,
+            defaultPath: defaultPath,
             settingAppTheme: Themes.getDefaultTheme(),
-            defaultPath: defaultPath
+            settingAppLanguage: Languages.getDefaultLanguage()
         }
     },
 
@@ -88,10 +97,15 @@ module.exports = {
         if (settings.settingMaxResults) {
             document.getElementById('settingMaxResults').value = settings.settingMaxResults;
         }
-		
+
         if (settings.settingAppTheme) {
             document.getElementById('settingAppTheme').value = settings.settingAppTheme;
             Themes.setTheme(settings.settingAppTheme);
+        }
+
+        if (settings.settingAppLanguage) {
+            document.getElementById('settingAppLanguage').value = settings.settingAppLanguage;
+            Languages.setLanguage(settings.settingAppLanguage);
         }
 
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);
@@ -104,8 +118,9 @@ module.exports = {
             settingUnlockOnUnequip: document.getElementById('settingUnlockOnUnequip').checked,
             settingRageSet: document.getElementById('settingRageSet').checked,
             settingMaxResults: parseInt(document.getElementById('settingMaxResults').value || 5_000_000),
+            settingDefaultPath: pathOverride ? pathOverride : defaultPath,
             settingAppTheme: document.getElementById('settingAppTheme').value || module.exports.getDefaultSettings().settingAppTheme,
-            settingDefaultPath: pathOverride ? pathOverride : defaultPath
+            settingAppLanguage: document.getElementById('settingAppLanguage').value || module.exports.getDefaultSettings().settingAppLanguage
         };
 
         Files.saveFile(Files.path(settingsPath), JSON.stringify(settings, null, 2))

@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     OptimizerGrid.initialize();
     Tooltip.initialize();
     Themes.initialize();
+	await Languages.initialize();
     Settings.initialize();
 
     Saves.loadAutoSave();
