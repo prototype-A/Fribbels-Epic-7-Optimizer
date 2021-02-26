@@ -2,6 +2,7 @@ const rangesliderJs = require('rangeslider-js');
 var permutations = 0;
 var progressTimer;
 var currentFilteredItems = [];
+var clearText = ' (clear)';
 
 function buildSlider(slider) {
     var sliderEl = document.querySelector(slider);
@@ -278,30 +279,82 @@ module.exports = {
             recalculateFilters();
         });
 
-        document.getElementById('substatPriorityLabel').addEventListener("click", async () => {
-            clearSubstatPriority();
-            recalculateFilters();
+        const statsLabel = document.getElementById('statsLabel');
+        statsLabel.addEventListener("mouseenter", () => {
+            statsLabel.innerText += clearText;
         });
-        document.getElementById('statsLabel').addEventListener("click", async () => {
+        statsLabel.addEventListener("mouseleave", () => {
+            statsLabel.innerText = statsLabel.innerText.replace(clearText, '');
+        });
+        statsLabel.addEventListener("click", async () => {
             clearStats();
             recalculateFilters();
         });
-        document.getElementById('ratingsLabel').addEventListener("click", async () => {
+
+        const optionsLabel = document.getElementById('optionsLabel');
+        optionsLabel.addEventListener("mouseenter", () => {
+            optionsLabel.innerText += clearText;
+        });
+        optionsLabel.addEventListener("mouseleave", () => {
+            optionsLabel.innerText = optionsLabel.innerText.replace(clearText, '');
+        });
+        optionsLabel.addEventListener("click", async () => {
+            clearOptions();
+            recalculateFilters();
+        });
+
+        const statFiltersLabel = document.getElementById('statFiltersLabel');
+        statFiltersLabel.addEventListener("mouseenter", () => {
+            statFiltersLabel.innerText += clearText;
+        });
+        statFiltersLabel.addEventListener("mouseleave", () => {
+            statFiltersLabel.innerText = statFiltersLabel.innerText.replace(clearText, '');
+        });
+        statFiltersLabel.addEventListener("click", async () => {
+            clearStats();
+            recalculateFilters();
+        });
+
+        const ratingsLabel = document.getElementById('ratingsLabel');
+        ratingsLabel.addEventListener("mouseenter", () => {
+            ratingsLabel.innerText += clearText;
+        });
+        ratingsLabel.addEventListener("mouseleave", () => {
+            ratingsLabel.innerText = ratingsLabel.innerText.replace(clearText, '');
+        });
+        ratingsLabel.addEventListener("click", async () => {
             clearRatings();
             recalculateFilters();
         });
+
+        const substatPriorityLabel = document.getElementById('substatPriorityLabel');
+        substatPriorityLabel.addEventListener("mouseenter", () => {
+            substatPriorityLabel.innerText += clearText;
+        });
+        substatPriorityLabel.addEventListener("mouseleave", () => {
+            substatPriorityLabel.innerText = substatPriorityLabel.innerText.replace(clearText, '');
+        });
+        substatPriorityLabel.addEventListener("click", async () => {
+            clearSubstatPriority();
+            recalculateFilters();
+        });
+
+        const accessorySetsLabel = document.getElementById('accessorySetsLabel');
+        accessorySetsLabel.addEventListener("mouseenter", () => {
+            accessorySetsLabel.innerText += clearText;
+        });
+        accessorySetsLabel.addEventListener("mouseleave", () => {
+            accessorySetsLabel.innerText = accessorySetsLabel.innerText.replace(clearText, '');
+        });
+        accessorySetsLabel.addEventListener("click", async () => {
+            Selectors.clearGearMainAndSets();
+            recalculateFilters();
+        });
+
         // document.getElementById('forceLabel').addEventListener("click", async () => {
         //     clearForce();
         //     recalculateFilters();
         // });
-        document.getElementById('optionsLabel').addEventListener("click", async () => {
-            clearOptions();
-            recalculateFilters();
-        });
-        document.getElementById('accessorySetsLabel').addEventListener("click", async () => {
-            Selectors.clearGearMainAndSets();
-            recalculateFilters();
-        });
     },
 
     drawPreview: (gearIds) => {
@@ -367,6 +420,10 @@ module.exports = {
         recalculateFilters();
         Selectors.refreshInputHeroAdd();
         Selectors.refreshAllowGearFrom();
+    },
+
+    setMouseHoverClearText: (text) => {
+        clearText = ' (' + text + ')';
     }
 }
 

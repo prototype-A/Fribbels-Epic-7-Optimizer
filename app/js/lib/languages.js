@@ -50,6 +50,8 @@ module.exports = {
                 }
             }
 
+            OptimizerTab.setMouseHoverClearText(translation['translation']['app']['clearSectionText']);
+
             if (translation['styles'].hasOwnProperty(elemTag)) {
                 for (var _style of Object.keys(translation['styles'][elemTag])) {
                     elem.style[_style] = translation['styles'][elemTag][_style];

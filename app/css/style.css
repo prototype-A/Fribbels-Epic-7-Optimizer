@@ -1100,46 +1100,26 @@ body.dark-theme input {
   width: 100px;
   text-align: right;
 }
-#substatPriorityLabel {
-  cursor: pointer;
-}
-#substatPriorityLabel:hover:after{
-  cursor: pointer;
-}
 #statsLabel {
   cursor: pointer;
-}
-#statsLabel:hover:after {
-  cursor: pointer;
-  content: " (clear)";
-}
-#ratingsLabel {
-  cursor: pointer;
-}
-#ratingsLabel:hover:after {
-  cursor: pointer;
-  content: " (clear)";
-}
-#forceLabel {
-  cursor: pointer;
-}
-#forceLabel:hover:after {
-  cursor: pointer;
-  content: " (clear)";
 }
 #optionsLabel {
   cursor: pointer;
 }
-#optionsLabel:hover:after {
+#statFiltersLabel {
   cursor: pointer;
-  content: " (clear)";
+}
+#ratingsLabel {
+  cursor: pointer;
+}
+#substatPriorityLabel {
+  cursor: pointer;
 }
 #accessorySetsLabel {
   cursor: pointer;
 }
-#accessorySetsLabel:hover:after {
+#forceLabel {
   cursor: pointer;
-  content: " (clear)";
 }
 
 .gearTabBottomPanel {

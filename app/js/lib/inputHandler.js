@@ -104,9 +104,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         HeroesTab.initialize();
         HeroesGrid.initialize();
 
+        Themes.initialize();
+        await Languages.initialize();
         Settings.initialize();
         Saves.loadAutoSave();
     });
+    Scanner.initialize();
     Updater.checkForUpdates();
     DarkMode.initialize();
     // GearCalculator.initialize();
@@ -116,11 +119,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     Importer.addEventListener();
 
     Tooltip.initialize();
-    Themes.initialize();
-	await Languages.initialize();
-    Settings.initialize();
 
-    Saves.loadAutoSave();
 
     console.log("Document initialized")
 });
