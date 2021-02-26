@@ -15,7 +15,8 @@ module.exports = {
     },
 
     getDefaultTheme: () => {
-        return module.exports.getThemeList()[0];
+        //return module.exports.getThemeList()[0];
+        return 'Light';
     },
 
     getThemeList: () => {
