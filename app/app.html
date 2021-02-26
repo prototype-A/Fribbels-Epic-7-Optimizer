@@ -1154,6 +1154,14 @@ window.jQuery = $;
                     </div>
                   </div>
                 </div>
+                <div class="gearTabFilterLongRow">
+                  <div class="gearTabShortButton">
+                    <div class="gearTabButton" id="level0Filter">
+                      <!-- <img class="gearTabIcon" src="./assets/statatkpercentdark.png"></img> -->
+                      <div class="gearTabButtonLabel shortLabel">0</div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
 
@@ -1362,11 +1370,10 @@ window.jQuery = $;
   <!--
         </div>
         <div class="heroesTabButtonRow"> -->
-
           <input type="submit" value="Equip Build" class="gearPreviewButton" id="equipBuildSubmit" data-tl-key="heroEquipBuildButtonText">
           <input type="submit" value="Rename Build" class="gearPreviewButton" id="editBuildSubmit" data-tl-key="heroRenameBuildButtonText">
+          <input type="submit" value="Save As Build" class="gearPreviewButton" id="saveAsBuildSubmit" data-tl-key="heroSaveBuildButtonText">
           <input type="submit" value="Remove Build" class="gearPreviewButton" id="removeBuildSubmit" data-tl-key="heroRemoveBuildButtonText">
-
         </div>
 
         <div id="heroes-equipped-section">
@@ -1410,31 +1417,49 @@ window.jQuery = $;
 
 
     <div id="importer-section" class="tab-panel">
-      <h2 data-tl-key="importGearScreenshotsTitle">Creating gear data from screenshots</h2>
-      <p data-tl-key="importGearScreenshotsDesc">
-      Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)</br>
-      </p>
-      <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
 
-      <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
+      <h2 data-tl-key="gearScanTitle">Loading gear automatically from the game</h2>
 
-
-      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit" data-tl-key="chooseScreenshotFolderButton">
-      <span id="fileReadSubmitOutputText">Waiting for folder..</span>
-
-      <br>
-      <br>
-
-      <textarea type="text" id="exportOutputText" value="" readonly></textarea>
-
-      <br>
-
-      <p data-tl-key="exportGearDataDesc">
-        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+      <p data-tl-key="gearScanDesc">
+        1. Install requirements from the instructions</br>
+        2. Close Epic 7</br>
+        3. Click <b>Start scanning</b></br>
+        4. Open Epic 7, and load into the lobby</br>
+        5. Click <b>Stop scanning</b></br>
+        6. Wait up to 30 secs, then once the data appears, click <b>Export</b> to save it to a "gear.txt"</br>
+        7. Import the "gear.txt" with the <b>Replace/Add/Merge</b> options below</br>
+        8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items</br>
       </p>
 
-      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput" data-tl-key="exportGearDataButtonText">
-      <text id="screenshotExportOutputText">Waiting for file..</text>
+      <select id="importLimitEnhance" class="gearPreviewButton">
+        <option value=0>All</option>
+        <option value=3>+3 and up</option>
+        <option value=6 selected>+6 and up</option>
+        <option value=9>+9 and up</option>
+        <option value=12>+12 and up</option>
+        <option value=15>+15</option>
+      </select>
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Start scanning" id="loadIngameGearStart" data-tl-key="startGearScanButtonText">
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Stop scanning" id="loadIngameGearEnd" data-tl-key="stopGearScanButtonText">
+
+      <br>
+      <br>
+
+      <textarea type="text" id="loadFromGameExportOutputText" value="" readonly></textarea>
+
+      <br>
+      <br>
+
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveLoadFromGameExportOutput" data-tl-key="exportGearDataButtonText">
+      <text id="loadFromGameExportOutputText"></text>
 
       <br>
       <br>
@@ -1442,7 +1467,7 @@ window.jQuery = $;
 
       <h2 data-tl-key="importGearDataTitle">Importing gear data</h2>
       <p data-tl-key="importGearDataDesc">
-      After the gear set is created, choose one of the following ways to import your gear, then select your "gear.txt" file.</br>
+      After the "gear.txt" is created, choose one of the following ways to import your gear, then select your "gear.txt" file.</br>
       Use <b>replace</b> to completely replace any existing gear with your new gear screenshots. This will wipe existing heroes.</br>
       Use <b>add</b> to add your new gear screenshots to your currently loaded gear. Does not wipe heroes.</br>
       Use <b>merge</b> to combine your new gear screenshots with your currently loaded gear.</br>
@@ -1486,6 +1511,35 @@ window.jQuery = $;
       <br>
       <br>
       <hr>
+
+      <h2 data-tl-key="importGearDataTitle">Creating gear data from screenshots</h2>
+      <p data-tl-key="importGearScreenshotsDesc">
+      Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)</br>
+      </p>
+      <!-- <input type="file" webkitdirectory id="fileFolderSelect"/> -->
+
+      <!-- <input type="submit" class="gearPreviewButton" value="Submit" id="fileReadSubmit"> -->
+
+
+      <input type="submit" class="gearPreviewButton" value="Choose folder" id="fileReadSubmit" data-tl-key="chooseScreenshotFolderButtonText">
+      <span id="fileReadSubmitOutputText">Waiting for folder..</span>
+
+      <br>
+      <br>
+
+      <textarea type="text" id="exportOutputText" value="" readonly></textarea>
+
+      <br>
+
+      <p data-tl-key="exportGearDataDesc">
+        Once results are printed, hit 'Export'. This will output a "gear.txt" in the folder where you installed this app.
+      </p>
+
+      <input type="submit" class="gearPreviewButton" value="Export" id="saveExportOutput" data-tl-key="exportGearDataButtonText">
+      <text id="screenshotExportOutputText"></text>
+
+      <br>
+      <br>      <hr>
 
       <h2 data-tl-key="zarrocDataImportTitle">Import gear from Zarroc optimizer</h2>
       <p data-tl-key="zarrocDataImportDesc">
@@ -1535,8 +1589,9 @@ window.jQuery = $;
           </div>
         </div>
 
-        <div>
+        <div class="toggleRow">
           <input type="submit" class="gearPreviewButton" value="Change saves folder" id="selectDefaultFolderSubmit" data-tl-key="changeDataSaveLocButtonText">
+          <div class="toggleRowSpace"></div>
           <text id="selectDefaultFolderSubmitOutputText">Select default folder</text>
         </div>
 
@@ -1553,6 +1608,19 @@ window.jQuery = $;
           </div>
           <select id="settingAppLanguage" class="selectionDropdown"></select>
         </div>
+
+<!--
+        <div class="toggleRow">
+          <input type="color" class="gearPreviewButton" id="backgroundColorPicker">
+          <div class="toggleRowSpace"></div>
+          <text>Select background color</text>
+        </div>
+
+        <div class="toggleRow">
+          <input type="color" class="gearPreviewButton" id="textColorPicker">
+          <div class="toggleRowSpace"></div>
+          <text>Select text color</text>
+        </div> -->
 
       <br>
       <br>

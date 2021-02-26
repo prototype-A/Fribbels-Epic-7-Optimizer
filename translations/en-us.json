@@ -18,6 +18,7 @@
             "filterResetButtonText": "Reset Filters",
 
             "statsLabel": "Stats",
+            "clearSectionText": "clear",
 
             "optionsLabel": "Options",
             "useReforgeStatsOption": "Use reforged stats",
@@ -50,7 +51,7 @@
             "ratingScoreLabel": "Score",
             "ratingUpgLabel": "Upg",
 
-            "substatPriorityLabel": "Substat Priority (<u>clear</u>)",
+            "substatPriorityLabel": "Substat Priority",
             "substatAtkLabel": "Atk",
             "substatHpLabel": "Hp",
             "substatDefLabel": "Def",
@@ -141,7 +142,6 @@
 
             "filtersLabel": "Filters",
             "gearTypeLabel": "Gear",
-            "gearSetsLabel": "Sets",
             "gearMainStatsLabel": "Main Stats",
             "gearSubStatsLabel": "Sub Stats",
             "gearLevelLabel": "Level",
@@ -160,6 +160,7 @@
             "removeHeroButtonText": "Remove Hero",
             "heroEquipBuildButtonText": "Equip Build",
             "heroRenameBuildButtonText": "Rename Build",
+            "heroSaveBuildButtonText": "Save As Build",
             "heroRemoveBuildButtonText": "Remove Build",
 
             "heroUnequipGearButtonText": "Unequip Item(s)",
@@ -169,17 +170,11 @@
             "heroDeselectAllGearButtonText": "Deselect All",
 
             "importerTabName": "Importer",
-            "importGearScreenshotsTitle": "Creating gear data from screenshots",
-            "importGearScreenshotsDesc": "Hit 'Choose Folder', navigate into the folder where your screenshots are located, then hit 'Submit'. (The folder should show as empty, just select it)",
-            "chooseScreenshotFolderButton": "Choose folder",
-            "exportGearDataDesc": "Once results are printed, hit 'Export'. This will output a \"gear.txt\" in the folder where you installed this app.",
+            "gearScanTitle": "Loading gear automatically from the game",
+            "gearScanDesc": "  1. Install requirements from the instructions\n  2. Close Epic 7\n  3. Click '{startGearScanButtonText}'\n  4. Open Epic 7 and load into the lobby\n  5. Click '{stopGearScanButtonText}'\n  6. Wait up to 30 secs, then once the data appears, click '{exportGearDataButtonText}' to save it to a \"{defaultGearFileName}\"  7. Import the \"{defaultGearFileName}\" file with the Replace/Add/Merge options below\n  8. Go to the Gear tab, and use the Level = 0 filter to manually fix any level 0 items",
+            "startGearScanButtonText": "Start scanning",
+            "stopGearScanButtonText": "Stop scanning",
             "exportGearDataButtonText": "Export",
-
-            "importGearDataTitle": "Importing gear data",
-            "importGearDataDesc": "A <b>strong</b> and <i>italic</i> description.",
-            "replaceGearDataButtonText": "Replace data",
-            "addGearDataButtonText": "Add new data",
-            "mergeGearDataButtonText": "Merge data",
 
             "saveLoadOptimizerDataTitle": "Save/Load all optimizer data",
             "saveLoadOptimizerDataDesc": "You can load/save your hero + gear configuration here.",
@@ -188,10 +183,22 @@
             "dataSavedStatusText": "Saved 0 heroes and 0 items to file",
             "dataLoadedStatusText": "Loaded 0 heroes and 0 items from file",
 
+            "importGearScreenshotsTitle": "Creating gear data from screenshots",
+            "importGearScreenshotsDesc": "Hit '{chooseScreenshotFolderButtonText}', navigate into the folder where your screenshots are located, then hit 'Open folder'. (The folder should show as empty, just select it)",
+            "chooseScreenshotFolderButtonText": "Choose folder",
+            "exportGearDataDesc": "2Once results are printed, hit '{exportGearDataButtonText}'. This will output a \"{defaultGearFileName}\" in the folder where you installed this app.",
+
+            "importGearDataTitle": "Importing gear data",
+            "importGearDataDesc": "After \"{defaultGearFileName}\" is created, choose one of the following ways to import your gear, then select your \"{defaultGearFileName}\" file.\nUse '{replaceGearDataButtonText}' to completely replace any and all existing gear with your new gear screenshots. This will wipe existing heroes.\nUse '{addGearDataButtonText}' to add your new gear screenshots to your current list of gear. This does not wipe your heroes.\nUse '{mergeGearDataButtonText}' to combine your new gear screenshots with your currently loaded gear.\nMerging replaces your old items with new items, while keeping your heroes' equipped gear and builds intact.\nThis is useful for people who re-screenshot all their gear, and want to keep all their hero settings.",
+            "replaceGearDataButtonText": "Replace data",
+            "addGearDataButtonText": "Add new data",
+            "mergeGearDataButtonText": "Merge data",
+
             "zarrocDataImportTitle": "Import gear from Zarroc Optimizer",
             "zarrocDataImportDesc": "Select the Zarroc optimizer file here.",
             "zarrocDataImportButtonText": "Import Zarroc data",
 
+            "defaultGearFileName": "gear.txt",
             "fileWaitingStatusText": "Waiting for file..",
             "folderWaitingStatusText": "Waiting for folder..",
 

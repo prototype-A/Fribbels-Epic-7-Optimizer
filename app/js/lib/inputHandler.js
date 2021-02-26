@@ -39,6 +39,7 @@ global.Settings = require('./settings');
 global.Themes = require('./themes');
 global.Languages = require('./languages');
 global.StatPreview = require('./statPreview');
+global.Artifact = require('./artifact');
 
 // Tab
 global.HeroesTab = require('./tabs/heroesTab');
@@ -52,6 +53,7 @@ global.ItemsGrid = require('./grids/itemsGrid');
 
 global.Subprocess = require('./subprocess');
 global.Selectors = require('./selectors');
+global.Settings = require('./settings');
 global.ForceFilter = require('./forceFilter');
 global.PriorityFilter = require('./priorityFilter');
 global.ZarrocConverter = require('./zarrocConverter');
@@ -86,38 +88,39 @@ global.HtmlGenerator = require('./htmlGenerator');
 global.fs = require('fs');
 global.Notifier = require('./notifier');
 global.Saves = require('./saves');
+global.Scanner = require('./scanner');
 const Jimp = require('jimp');
 
 document.addEventListener("DOMContentLoaded", async () => {
-    Selectors.initialize();
     console.log("DOMContentLoaded")
 
-    Subprocess.initialize();
+    Subprocess.initialize(async () => {
+        await HeroData.initialize();
+        ZarrocConverter.initialize();
+        OptimizerTab.initialize();
+        OptimizerGrid.initialize();
+        ItemsTab.initialize();
+        ItemsGrid.initialize();
+        HeroesTab.initialize();
+        HeroesGrid.initialize();
+
+        Settings.initialize();
+        Saves.loadAutoSave();
+    });
+    Updater.checkForUpdates();
     DarkMode.initialize();
-    HtmlGenerator.initialize();
     // GearCalculator.initialize();
-    await HeroData.initialize();
-    Ocr.initialize();
-    Assets.initialize();
+    Selectors.initialize();
     Saves.initialize();
-    ItemsTab.initialize();
-    ItemsGrid.initialize();
 
     Importer.addEventListener();
-    ZarrocConverter.initialize();
 
-    HeroesTab.initialize();
-    HeroesGrid.initialize();
-    OptimizerTab.initialize();
-    OptimizerGrid.initialize();
     Tooltip.initialize();
     Themes.initialize();
 	await Languages.initialize();
     Settings.initialize();
 
     Saves.loadAutoSave();
-
-    Updater.checkForUpdates();
 
     console.log("Document initialized")
 });

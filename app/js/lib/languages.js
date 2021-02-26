@@ -30,18 +30,26 @@ module.exports = {
 			let elemTag = elem.tagName.toLowerCase();
             let tlKey = elem.dataset['tlKey'];
             let tlData = translation['translation']['app'][tlKey];
+
+            const substitutes = tlData.match(/{([^}]+)}/g);
+            if (substitutes != null) {
+                for (var sub of substitutes) {
+                    let subKey = sub.substr(1, sub.length - 2);
+                    tlData = tlData.replace(sub, translation['translation']['app'][subKey]);
+                }
+            }
+
             if (tlData != '') {
                 if (elemTag === 'input') {
                     elem.value = tlData;
                     //elem.style.width = elem.value.length + 'ch';
-                } else if (elemTag === 'p' || elemTag === 'div') {
-                    elem.innerHTML = tlData;
                 } else if (elemTag === 'optgroup') {
                     elem.label = tlData;
-			    } else {
+                } else {
                     elem.innerText = tlData;
                 }
             }
+
             if (translation['styles'].hasOwnProperty(elemTag)) {
                 for (var _style of Object.keys(translation['styles'][elemTag])) {
                     elem.style[_style] = translation['styles'][elemTag][_style];

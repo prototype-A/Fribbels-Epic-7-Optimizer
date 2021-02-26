@@ -87,6 +87,34 @@ module.exports = {
             })
         });
 
+        document.getElementById('saveAsBuildSubmit').addEventListener("click", async () => {
+            console.log("saveAsBuildSubmit");
+            const row = HeroesGrid.getSelectedRow();
+
+            row.items = Object.values(row.equipment).map(x => x.id)
+            console.warn("Save as build", row);
+            console.warn("Save as build", row.items);
+
+            if (row.items.length < 6) {
+                Notifier.warn("Hero need a 6 item build before it can be saved");
+                return;
+            }
+
+            row.items = [
+                row.equipment.Weapon.id,
+                row.equipment.Helmet.id,
+                row.equipment.Armor.id,
+                row.equipment.Necklace.id,
+                row.equipment.Ring.id,
+                row.equipment.Boots.id,
+            ]
+
+            Api.addBuild(row.id, row).then(x => {
+                HeroesGrid.refreshBuilds();
+                Saves.autoSave();
+            });
+        });
+
         document.getElementById('equipBuildSubmit').addEventListener("click", async () => {
             console.log("equipBuildSubmit");
             const row = HeroesGrid.getSelectedRow();
@@ -116,7 +144,64 @@ module.exports = {
 
             showEditHeroInfoPopups(row.name)
             const bonusStats = await Dialog.editHeroDialog(row);
+
+            const e7StatToBonusStat = {
+                "att_rate": "aeiAttackPercent",
+                "max_hp_rate": "aeiHealthPercent",
+                "def_rate": "aeiDefensePercent",
+                "att": "aeiAttack",
+                "max_hp": "aeiHealth",
+                "def": "aeiDefense",
+                "speed": "aeiSpeed",
+                "res": "aeiEffectResistance",
+                "cri": "aeiCritChance",
+                "cri_dmg": "aeiCritDamage",
+                "acc": "aeiEffectiveness",
+                "coop": "aeiDualAttackChance"
+            }
+
             console.log("Bonus stats", bonusStats, row.id);
+
+            // Imprint
+            const imprintIngameType = bonusStats.heroInfo.self_devotion.type;
+            const imprintBonusType = e7StatToBonusStat[imprintIngameType];
+            const imprintNumberText = bonusStats.imprintNumber;
+            if (imprintNumberText != "None") {
+                const imprintNumber = parseFloat(imprintNumberText)
+
+                console.log("ADDING AEI IMPRINT", imprintNumber, imprintBonusType)
+
+                bonusStats[imprintBonusType] += imprintNumber;
+            }
+
+            // Artifact
+            const artifactName = bonusStats.artifactName;
+            if (artifactName != "None") {
+                const artifactLevelText = bonusStats.artifactLevel;
+                if (artifactLevelText != "None") {
+                    const artifactLevel = parseInt(artifactLevelText);
+                    const artifactStats = Artifact.getStats(artifactName, artifactLevel);
+
+                    console.log("ADDING AEI ARTIFACT", artifactLevel)
+                    console.log("ADDING AEI ARTIFACT", artifactLevelText)
+                    console.log("ADDING AEI ARTIFACT", artifactName)
+
+                    bonusStats.aeiHealth += artifactStats.health;
+                    bonusStats.aeiAttack += artifactStats.attack;
+                }
+            }
+
+            // EE
+            const eeNumberText = bonusStats.eeNumber;
+            if (eeNumberText != "None") {
+                const eeNumber = parseInt(eeNumberText);
+                const eeIngameType = bonusStats.ee.stat.type;
+                const eeBonusType = e7StatToBonusStat[eeIngameType];
+
+                console.log("ADDING AEI EE", eeBonusType, eeNumber)
+
+                bonusStats[eeBonusType] += eeNumber;
+            }
 
             await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
             Notifier.success("Saved bonus stats");
