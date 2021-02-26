@@ -101,7 +101,8 @@
     ],
     "extraFiles": [
       "./data/**",
-	  "./themes/**"
+      "./themes/**",
+      "./translations/**"
     ],
     "publish": {
       "provider": "github",

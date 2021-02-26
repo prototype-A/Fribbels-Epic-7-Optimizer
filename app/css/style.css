@@ -1144,8 +1144,8 @@ body.dark-theme input {
   margin-right: 10px
 }
 
-.dropdownRow {
-  margin-bottom: 8px;
+#settingsTab > div {
+  margin-bottom: 10px;
 }
 .selectionDropdown {
   width: 140px;
