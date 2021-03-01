@@ -1,12 +1,33 @@
 var childProcess = require('child_process')
 
 global.child = null;
-var pyshell;
-var data = [];
-var intervals = [];
+global.data = [];
 
 // global.api = "http://127.0.0.1:5000";
 global.api = "https://krivpfvxi0.execute-api.us-west-2.amazonaws.com/dev";
+
+global.command = 'python'
+var findCommandSpawn = null;
+function findcommand() {
+    if (Files.isMac()) {
+        console.log("Detecting python on mac, using python");
+        return;
+    } else {
+        command = 'py'
+    }
+
+    console.log("Detecting python, using py for now");
+    try {
+        findCommandSpawn = childProcess.spawn('py');
+        findCommandSpawn.on('error', function(err){
+            console.warn("Error spawning python detector, using python instead", err)
+            command = 'python'
+        })
+    } catch (e) {
+        console.warn("Error trying to detect py, using python instead", e)
+        command = 'python';
+    }
+}
 
 async function finishedReading(data) {
     try {
@@ -25,7 +46,7 @@ async function finishedReading(data) {
 
             if (rawItems.length == 0) {
                 document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-                Notifier.error("Failed reading items");
+                Notifier.error("Failed reading items, please try again. No items were found.");
                 return
             }
 
@@ -40,64 +61,79 @@ async function finishedReading(data) {
             document.getElementById('loadFromGameExportOutputText').value = serializedStr;
         } else {
             document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
-            Notifier.error("Failed reading items");
+            Notifier.error("Failed reading items, please try again. Unable to read items.");
         }
     } catch (e) {
         console.error(e);
         document.getElementById('loadFromGameExportOutputText').value = "Item reading failed, please try again.";
+        Notifier.error("Failed reading items, please try again. " + e);
+    }
+}
+
+global.finishedReading = finishedReading;
+
+function launchScanner(command) {
+    try {
+        data = [];
+
+        if (child) {
+            child.kill()
+        }
+
+        if (findCommandSpawn) {
+            findCommandSpawn.kill()
+            findCommandSpawn = null;
+        }
+
+        let bufferArray = []
+
+        try {
+            child = childProcess.spawn(command, [Files.path(Files.getDataPath() + '/py/scanner.py')])
+        } catch (e) {
+            console.error(e)
+            Notifier.error("Unable to start python script " + e)
+        }
+
+        child.on('close', (code) => {
+            console.log(`Python child process exited with code ${code}`);
+        });
+
+        child.stderr.on('data', (data) => {
+            const str = data.toString()
+            console.error(str);
+        })
+
+        child.stdout.on('data', (message) => {
+            message = message.toString()
+            console.log(message)
+
+            bufferArray.push(message)
+
+            if (message.includes('DONE')) {
+                console.log(bufferArray.join('').split('&').filter(x => !x.includes('DONE')))
+                data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replace(/\s/g,''))
+                // data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replaceAll('↵', '')).map(x => x.replaceAll('\n', '')).map(x => x.replaceAll('\r', ''))
+                finishedReading(data);
+            } else {
+                data.push(message);
+            }
+        });
+        console.log("Started scanning")
+        document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
+    } catch (e) {
+        console.error(e);
+        document.getElementById('loadFromGameExportOutputText').value = "Failed to start scanning, make sure you have Python and pcap installed.";
         Notifier.error(e);
     }
 }
 
 module.exports = {
+    initialize: () => {
+        findcommand();
+    },
+
     start: () => {
-        try {
-            data = [];
-
-            if (child) {
-                child.kill()
-            }
-
-            let bufferArray= []
-
-            try {
-                child = childProcess.spawn("python", [Files.path(Files.getDataPath() + '/py/scanner.py')])
-            } catch (e) {
-                console.error(e)
-                Notifier.error("Unable to start python script " + e)
-            }
-
-            child.on('close', (code) => {
-                console.log(`Python child process exited with code ${code}`);
-            });
-
-            child.stderr.on('data', (data) => {
-                const str = data.toString()
-                console.error(str);
-            })
-
-            child.stdout.on('data', (message) => {
-                message = message.toString()
-                console.log(message)
-
-                bufferArray.push(message)
-
-                if (message.includes('DONE')) {
-                    console.log(bufferArray.join('').split('&').filter(x => !x.includes('DONE')))
-                    data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replace(/\s/g,''))
-                    // data = bufferArray.join('').split('&').filter(x => !x.includes('DONE')).map(x => x.replaceAll('↵', '')).map(x => x.replaceAll('\n', '')).map(x => x.replaceAll('\r', ''))
-                    finishedReading(data);
-                } else {
-                    data.push(message);
-                }
-            });
-            console.log("Started scanning3")
-            document.getElementById('loadFromGameExportOutputText').value = "Started scanning...";
-        } catch (e) {
-            console.error(e);
-            document.getElementById('loadFromGameExportOutputText').value = "Failed to start scanning, make sure you have Python and pcap installed.";
-            Notifier.error(e);
-        }
+        launchScanner(command)
     },
 
     end: async () => {
@@ -110,18 +146,7 @@ module.exports = {
 
         console.log("Stop scanning")
         child.stdin.write('END\n');
-        // pyshell.send('END');
     }
-}
-
-function clearAllIntervals() {
-    for (var interval of intervals) {
-        if (interval) {
-            clearInterval(inverval);
-        }
-    }
-
-    intervals = [];
 }
 
 function convertItems(rawItems) {
@@ -179,10 +204,10 @@ function convertSubStats(item) {
 function convertMainStat(item) {
     const mainOp = item.op[0];
     const mainOpType = mainOp[0];
-    const mainOpValue = mainOp[1];
+    const mainOpValue = item.mainStatValue;
     const mainType = statByIngameStat[mainOpType];
     const mainValue = isFlat(mainOpType) ? mainOpValue : Utils.round10ths(mainOpValue * 100);
-    const fixedMainValue = fixMainStatValue(item, mainType, mainValue);
+    const fixedMainValue = mainValue;
 
     item.main = new Stat(mainType, fixedMainValue);
 }
@@ -334,6 +359,10 @@ function fixMainStatValue(item, mainType, mainValue) {
     const stat = mainType;
     const level = item.level;
     const gear = item.gear;
+
+    if (item.enhance >= 15) {
+        return mainValue;
+    }
 
     if (level < 15) {
         if (isCritChance(stat))
