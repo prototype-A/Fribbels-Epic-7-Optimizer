@@ -1,4 +1,4 @@
-const themePath = './../../themes/';
+const themePath = Files.getRootPath() + '/themes/';
 let themeList = {};
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     },
 
     loadThemeList: () => {
-        let themeFiles = Files.listFilesInFolder('./themes');
+        let themeFiles = Files.listFilesInFolder(themePath);
         for (var themeFile of themeFiles) {
             let themeName = themeFile.substring(0, themeFile.lastIndexOf('.css'));
             themeList[themeName] = themeFile;

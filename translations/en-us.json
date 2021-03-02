@@ -12,7 +12,7 @@
 
             "optimizerTabName": "Optimizer",
             "heroLabel": "Hero",
-            "heroDropdownLabel": "Hero",
+            "inputHeroAddDropdownPlaceholder": "Hero",
             "startButtonText": "Start",
             "filterButtonText": "Filter",
             "cancelButtonText": "Cancel",
@@ -27,7 +27,7 @@
             "useLockedGearOption": "Locked items",
             "useEquippedGearOption": "Equipped items",
             "keepCurrentGearOption": "Keep current",
-            "excludeEquippedGearDropdownLabel": "Exclude equipped",
+            "optionsExcludeGearFromDropdownPlaceholder": "Exclude equipped",
 
             "statFiltersLabel": "Stat Filters",
             "statAtkLabel": "Atk",
@@ -64,9 +64,9 @@
             "topResultPercentageLabel": "Top %",
 
             "accessoryMainStatsLabel": "Accessory Main Stats",
-            "necklaceMainStatDropdownLabel": "Necklace",
-            "ringMainStatDropdownLabel": "Ring",
-            "bootMainStatDropdownLabel": "Boots",
+            "inputNecklaceStatDropdownPlaceholder": "Necklace",
+            "inputRingStatDropdownPlaceholder": "Ring",
+            "inputBootsStatDropdownPlaceholder": "Boots",
 
             "statCritChanceLabel": "Crit Chance",
             "statCritDamageLabel": "Crit Damage",
@@ -82,11 +82,12 @@
             "statSpeedLabel": "Speed",
 
             "gearSetsLabel": "Sets",
-            "gearSetDropdown1Label": "4 or 2 piece sets",
-            "gearSetDropdown2Label": "2 piece sets",
-            "gearSetDropdown3Label": "2 piece sets",
+            "inputSet1DropdownPlaceholder": "4 or 2 piece sets",
+            "inputSet2DropdownPlaceholder": "2 piece sets",
+            "inputSet3DropdownPlaceholder": "2 piece sets",
+
             "gearSetExclusionLabel": "Exclude",
-            "gearSetExclusionDropdownLabel": "Exclude sets",
+            "inputExcludeSetDropdownPlaceholder": "Exclude sets",
             "gear4PieceSetLabel": "4 Piece",
             "gear2PieceSetLabel": "2 Piece",
 
@@ -130,6 +131,7 @@
 
             "gearTabName": "Gear",
             "gearTableLabel": "Gear Table",
+            "numEquipmentSelectedLabel": "Selected: ",
 
             "gearActionsLabel": "Actions",
             "equipEditGearButtonText": "Equip / Edit Item",
@@ -217,6 +219,10 @@
             "changeDataSaveLocButtonText": "Change saves folder",
             "themeDropdownLabel": "Theme",
             "languageDropdownLabel": "Language"
+        },
+        "dropdown": {
+            "selectAllOptionLabel": "[Select All]",
+            "noMatchesFoundOptionLabel": "No Matches Found"
         },
         "heroNames": {
             "Achates": "Achates",

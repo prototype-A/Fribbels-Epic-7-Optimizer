@@ -490,7 +490,7 @@ window.jQuery = $;
               </select>
 
               <div class="panelLabel">
-                <div class="panelLabelText" data-tl-key="setUnityLabel">Exclude</div>
+                <div class="panelLabelText" data-tl-key="gearSetExclusionLabel">Exclude</div>
                 <img src="./assets/tooltip.png" class="tooltipImage" id="excludeTooltip"></img>
               </div>
               <select multiple="multiple" id="inputExcludeSet" class="inputSetFilterSelect">
@@ -776,7 +776,9 @@ window.jQuery = $;
             <img src="./assets/tooltip.png" class="tooltipImage" id="gearTableTooltip"></img>
           </div>
 
-          <div class="selectedCount" id="selectedCount">Selected: 0</div>
+          <div class="selectedCount" data-tl-key="numEquipmentSelectedLabel">Selected:
+            <span id="selectedCount">0</span>
+          </div>
         </div>
 
         <div class="gearGridContainer">

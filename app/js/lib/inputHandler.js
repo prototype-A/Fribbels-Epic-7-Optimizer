@@ -95,6 +95,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.log("DOMContentLoaded")
 
     Subprocess.initialize(async () => {
+        await Languages.initialize();
+        Themes.initialize();
+        Settings.initialize();
+		
         await HeroData.initialize();
         ZarrocConverter.initialize();
         OptimizerTab.initialize();
@@ -104,9 +108,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         HeroesTab.initialize();
         HeroesGrid.initialize();
 
-        Themes.initialize();
-        await Languages.initialize();
-        Settings.initialize();
         Saves.loadAutoSave();
     });
     Scanner.initialize();

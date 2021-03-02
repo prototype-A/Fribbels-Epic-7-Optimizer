@@ -1,5 +1,6 @@
-const translationsPath = './translations/';
+const translationsPath = Files.getRootPath() + '/translations/';
 let translationFiles = {};
+let translation = null;
 
 module.exports = {
     initialize: async () => {
@@ -24,10 +25,10 @@ module.exports = {
     },
 
     setLanguage: async (lang) => {
-        const translation = JSON.parse(await Files.readFile(translationsPath + translationFiles[lang]));
+        translation = JSON.parse(await Files.readFile(translationsPath + translationFiles[lang]));
 
-        document.body.querySelectorAll('[data-tl-key]').forEach(function(elem) {
-			let elemTag = elem.tagName.toLowerCase();
+        document.body.querySelectorAll('[data-tl-key]').forEach((elem) => {
+            let elemTag = elem.tagName.toLowerCase();
             let tlKey = elem.dataset['tlKey'];
             let tlData = translation['translation']['app'][tlKey];
 
@@ -46,11 +47,9 @@ module.exports = {
                 } else if (elemTag === 'optgroup') {
                     elem.label = tlData;
                 } else {
-                    elem.innerText = tlData;
+                    elem.childNodes[0].nodeValue = tlData;
                 }
             }
-
-            OptimizerTab.setMouseHoverClearText(translation['translation']['app']['clearSectionText']);
 
             if (translation['styles'].hasOwnProperty(elemTag)) {
                 for (var _style of Object.keys(translation['styles'][elemTag])) {
@@ -58,5 +57,68 @@ module.exports = {
                 }
             }
         });
+
+        updateHeroDropdownOptionsText('inputHeroAdd');
+
+        updateHeroDropdownOptionsText('optionsExcludeGearFrom');
+
+        updateSetDropdownOptionsText('inputNecklaceStat');
+        updateSetDropdownOptionsText('inputRingStat');
+        updateSetDropdownOptionsText('inputBootsStat');
+
+        updateSetDropdownOptionsText('inputSet1');
+        updateSetDropdownOptionsText('inputSet2');
+        updateSetDropdownOptionsText('inputSet3');
+
+        updateSetDropdownOptionsText('inputExcludeSet');
+
+        updateHeroDropdownOptionsText('addHeroesSelector');
+
+        OptimizerTab.setMouseHoverClearText(translation['translation']['app']['clearSectionText']);
+    },
+
+    getLocalizedHeroName: (heroNameEN) => {
+        if (translation != null) {
+            return translation['translation']['heroNames'][heroNameEN];
+        }
+
+        return heroNameEN;
     }
+}
+
+function updateMultipleSelectLocalization(dropdownId) {
+    $('#' + dropdownId).multipleSelect('refreshOptions', {
+        placeholder: translation['translation']['app'][dropdownId + 'DropdownPlaceholder'],
+        formatSelectAll() {
+            return translation['translation']['dropdown']['selectAllOptionLabel'];
+        },
+        formatNoMatchesFound() {
+            return translation['translation']['dropdown']['noMatchesFoundOptionLabel'];
+        }
+    });
+}
+
+function updateHeroDropdownOptionsText(dropdownId) {
+    let dropdown = document.getElementById(dropdownId);
+    for (let i = 0; i < dropdown.children.length; i++) {
+        dropdown.children[i].innerText = translation['translation']['heroNames'][dropdown.children[i].getAttribute('value')];
+    }
+    updateMultipleSelectLocalization(dropdownId, translation);
+
+    $('#' + dropdownId).multipleSelect('refresh');
+}
+
+function updateSetDropdownOptionsText(dropdownId) {
+    let dropdown = document.getElementById(dropdownId);
+    for (let i = 0; i < dropdown.children.length; i++) {
+        dropdown.children[i].setAttribute('label', translation['translation']['app'][dropdown.children[i].getAttribute('data-tl-key')]);
+
+        let dropdownOpts = dropdown.children[i];
+        for (let j = 0; j < dropdownOpts.length; j++) {
+            dropdownOpts.children[j].innerText = translation['translation']['app'][dropdownOpts.children[i].getAttribute('data-tl-key')];
+        }
+    }
+    updateMultipleSelectLocalization(dropdownId, translation);
+
+    $('#' + dropdownId).multipleSelect('refresh');
 }

@@ -403,9 +403,11 @@ module.exports = {
         for (var hero of heroes) {
             const option = document.createElement('option');
             const option2 = document.createElement('option');
-            option.innerHTML = hero.name;
+            option.setAttribute('data-hero-name-en', hero.name);
+            option.innerHTML = Languages.getLocalizedHeroName(hero.name);
             option.value = hero.id;
-            option2.innerHTML = hero.name;
+            option2.setAttribute('data-hero-name-en', hero.name);
+            option2.innerHTML = Languages.getLocalizedHeroName(hero.name);
             option2.value = hero.id;
 
             optimizerHeroSelector.add(option);
@@ -512,7 +514,7 @@ async function lockGearFromIcon(id) {
 }
 
 function redrawHeroImage() {
-    const name = $( "#inputHeroAdd option:selected" ).text()
+    const name = $( "#inputHeroAdd option:selected" ).attr('data-hero-name-en');
     if (!name || name.length == 0) {
         $('#inputHeroImage').attr("src", Assets.getBlank());
         return;
