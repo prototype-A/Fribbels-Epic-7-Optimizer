@@ -20,6 +20,14 @@ module.exports = {
         }
         const selectedNode = heroesGrid.gridOptions.api.getSelectedNodes()[0]
 
+        console.log('Heroes: ');
+        for (var hero of heroes) {
+            if (!hero['nameLocalized']) {
+                hero['nameLocalized'] = Languages.getLocalizedHeroName(hero['name']);
+            }
+        }
+		console.log(heroes);
+
         currentHeroes = heroes;
         heroesGrid.gridOptions.api.setRowData(heroes)
         heroesGrid.gridOptions.api.redrawRows();
@@ -173,32 +181,32 @@ function buildGrid(heroes) {
         },
 
         columnDefs: [
-            {headerName: 'icon', field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
-            {headerName: 'elem', field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
-            {headerName: 'class', field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
-            {headerName: 'name', field: 'name', width: 170, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
+            {headerName: Languages.getTranslationForKey('heroTableIconLabel'), field: 'name', width: 60, cellRenderer: (params) => renderIcon(params.value)},
+            {headerName: Languages.getTranslationForKey('heroTableElementLabel'), field: 'attribute', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderElement(params.value)},
+            {headerName: Languages.getTranslationForKey('heroTableClassLabel'), field: 'role', width: 50, filter: 'agTextColumnFilter', cellRenderer: (params) => renderClass(params.value)},
+            {headerName: Languages.getTranslationForKey('heroTableNameLabel'), field: 'nameLocalized', width: 170, wrapText: true, cellStyle: {'white-space': 'normal !important', 'line-height': '16px'}},
             // {headerName: 'Stars', field: 'rarity', width: 50},
             // {headerName: 'Class', field: 'role', width: 100, cellRenderer: (params) => renderClass(params.value)},
-            {headerName: 'sets', field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
-            {headerName: 'atk', field: 'atk'},
-            {headerName: 'hp', field: 'hp'},
-            {headerName: 'def', field: 'def'},
-            {headerName: 'spd', field: 'spd'},
-            {headerName: 'cr', field: 'cr'},
-            {headerName: 'cd', field: 'cd'},
-            {headerName: 'eff', field: 'eff'},
-            {headerName: 'res', field: 'res'},
-            {headerName: 'cp', field: 'cp'},
-            {headerName: 'hps', field: 'hpps'},
-            {headerName: 'ehp', field: 'ehp'},
-            {headerName: 'ehps', field: 'ehpps'},
-            {headerName: 'dmg', field: 'dmg'},
-            {headerName: 'dmgs', field: 'dmgps'},
-            {headerName: 'mcd', field: 'mcdmg', width: 55},
-            {headerName: 'mcds', field: 'mcdmgps', width: 55},
-            {headerName: 'dmgh', field: 'dmgh', width: 55},
-            {headerName: 'score', field: 'score', width: 55},
-            {headerName: 'upg', field: 'upgrades', width: 55},
+            {headerName: Languages.getTranslationForKey('gearSetsLabel'), field: 'equipment', width: 85, cellRenderer: (params) => renderSets(params.value)},
+            {headerName: Languages.getTranslationForKey('substatAtkLabel'), field: 'atk'},
+            {headerName: Languages.getTranslationForKey('substatHpLabel'), field: 'hp'},
+            {headerName: Languages.getTranslationForKey('substatDefLabel'), field: 'def'},
+            {headerName: Languages.getTranslationForKey('substatSpdLabel'), field: 'spd'},
+            {headerName: Languages.getTranslationForKey('substatCrLabel'), field: 'cr'},
+            {headerName: Languages.getTranslationForKey('substatCdLabel'), field: 'cd'},
+            {headerName: Languages.getTranslationForKey('substatEffLabel'), field: 'eff'},
+            {headerName: Languages.getTranslationForKey('substatResLabel'), field: 'res'},
+            {headerName: Languages.getTranslationForKey('ratingCombatPowerLabel'), field: 'cp'},
+            {headerName: Languages.getTranslationForKey('ratingHpSpeedLabel'), field: 'hpps'},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpLabel'), field: 'ehp'},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpSpeedLabel'), field: 'ehpps'},
+            {headerName: Languages.getTranslationForKey('ratingDmgLabel'), field: 'dmg'},
+            {headerName: Languages.getTranslationForKey('ratingDmgSpeedLabel'), field: 'dmgps'},
+            {headerName: Languages.getTranslationForKey('ratingMaxCritDmgLabel'), field: 'mcdmg', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingMaxCritDmgSpeedLabel'), field: 'mcdmgps', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingDmgHealthLabel'), field: 'dmgh', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingGearScoreLabel'), field: 'score', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingNumGearsToUpgradeLabel'), field: 'upgrades', width: 55},
         ],
         rowSelection: 'single',
         rowData: heroes,
@@ -221,28 +229,28 @@ function buildGrid(heroes) {
             // valueFormatter: numberFormatter,
         },
         columnDefs: [
-            {headerName: 'name', field: 'name', width: 150},
-            {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
-            {headerName: 'atk', field: 'atk'},
-            {headerName: 'hp', field: 'hp', width: 55},
-            {headerName: 'def', field: 'def'},
-            {headerName: 'spd', field: 'spd'},
-            {headerName: 'cr', field: 'cr'},
-            {headerName: 'cd', field: 'cd'},
-            {headerName: 'eff', field: 'eff'},
-            {headerName: 'res', field: 'res'},
+            {headerName: Languages.getTranslationForKey('buildsTableNameLabel'), field: 'name', width: 150},
+            {headerName: Languages.getTranslationForKey('gearSetsLabel'), field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
+            {headerName: Languages.getTranslationForKey('substatAtkLabel'), field: 'atk'},
+            {headerName: Languages.getTranslationForKey('substatHpLabel'), field: 'hp', width: 55},
+            {headerName: Languages.getTranslationForKey('substatDefLabel'), field: 'def'},
+            {headerName: Languages.getTranslationForKey('substatSpdLabel'), field: 'spd'},
+            {headerName: Languages.getTranslationForKey('substatCrLabel'), field: 'cr'},
+            {headerName: Languages.getTranslationForKey('substatCdLabel'), field: 'cd'},
+            {headerName: Languages.getTranslationForKey('substatEffLabel'), field: 'eff'},
+            {headerName: Languages.getTranslationForKey('substatResLabel'), field: 'res'},
             // {headerName: 'dac', field: 'dac'},
-            {headerName: 'cp', field: 'cp', width: 55},
-            {headerName: 'hps', field: 'hpps', width: 50},
-            {headerName: 'ehp', field: 'ehp', width: 55},
-            {headerName: 'ehps', field: 'ehpps', width: 50},
-            {headerName: 'dmg', field: 'dmg', width: 50},
-            {headerName: 'dmgs', field: 'dmgps', width: 50},
-            {headerName: 'mcd', field: 'mcdmg', width: 55},
-            {headerName: 'mcds', field: 'mcdmgps', width: 50},
-            {headerName: 'dmgh', field: 'dmgh', width: 50},
-            {headerName: 'score', field: 'score', width: 50},
-            {headerName: 'upg', field: 'upgrades', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingCombatPowerLabel'), field: 'cp', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingHpSpeedLabel'), field: 'hpps', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpLabel'), field: 'ehp', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpSpeedLabel'), field: 'ehpps', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpSpeedLabel'), field: 'dmg', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingDmgSpeedLabel'), field: 'dmgps', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingMaxCritDmgLabel'), field: 'mcdmg', width: 55},
+            {headerName: Languages.getTranslationForKey('ratingMaxCritDmgSpeedLabel'), field: 'mcdmgps', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingDmgHealthLabel'), field: 'dmgh', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingGearScoreLabel'), field: 'score', width: 50},
+            {headerName: Languages.getTranslationForKey('ratingNumGearsToUpgradeLabel'), field: 'upgrades', width: 50},
         ],
         rowHeight: 27,
         rowSelection: 'single',
@@ -257,6 +265,8 @@ function buildGrid(heroes) {
 
     const gridDiv = document.getElementById('heroes-table');
     const buildsGridDiv = document.getElementById('builds-table');
+	gridDiv.textContent = '';
+	buildsGridDiv.textContent = '';
     heroesGrid = new Grid(gridDiv, gridOptions);
     buildsGrid = new Grid(buildsGridDiv, buildsGridOptions);
     // console.log("HeroesGrid", heroesGrid);

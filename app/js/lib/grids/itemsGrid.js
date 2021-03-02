@@ -21,34 +21,34 @@ module.exports = {
             },
 
             columnDefs: [
-                {headerName: 'Set', field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
-                {headerName: 'Gear', field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
-                {headerName: 'Rank', field: 'rank'},
-                {headerName: 'Level', field: 'level', filter: 'agNumberColumnFilter'},
-                {headerName: 'Enhance', field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
-                {headerName: 'Main', field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(params.value)},
-                {headerName: 'Value', field: 'main.value', width: 60},
-                {headerName: 'Atk%', field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Atk', field: 'augmentedStats.Attack', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Spd', field: 'augmentedStats.Speed', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Cr', field: 'augmentedStats.CriticalHitChancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Cd', field: 'augmentedStats.CriticalHitDamagePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Hp%', field: 'augmentedStats.HealthPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Hp', field: 'augmentedStats.Health', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Def%', field: 'augmentedStats.DefensePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Def', field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Eff', field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Res', field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
-                {headerName: 'Score', field: 'wss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'dScore', field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'sScore', field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'cScore', field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: 'Equipped', field: 'equippedByName', width: 120},
+                {headerName: Languages.getTranslationForKey('gearTableSetLabel'), field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
+                {headerName: Languages.getTranslationForKey('gearTableTypeLabel'), field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
+                {headerName: Languages.getTranslationForKey('gearTableRankLabel'), field: 'rank'},
+                {headerName: Languages.getTranslationForKey('gearTableLevelLabel'), field: 'level', filter: 'agNumberColumnFilter'},
+                {headerName: Languages.getTranslationForKey('gearTableEnhanceLevelLabel'), field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
+                {headerName: Languages.getTranslationForKey('gearTableMainStatLabel'), field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(params.value)},
+                {headerName: Languages.getTranslationForKey('gearTableMainStatValueLabel'), field: 'main.value', width: 60},
+                {headerName: Languages.getTranslationForKey('gearTableAtkPercentLabel'), field: 'augmentedStats.AttackPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableFlatAtkLabel'), field: 'augmentedStats.Attack', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableSpdLabel'), field: 'augmentedStats.Speed', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableCritRateLabel'), field: 'augmentedStats.CriticalHitChancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableCritDmgLabel'), field: 'augmentedStats.CriticalHitDamagePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableHpPercentLabel'), field: 'augmentedStats.HealthPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableFlatHpLabel'), field: 'augmentedStats.Health', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableDefPercentLabel'), field: 'augmentedStats.DefensePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableFlatDefLabel'), field: 'augmentedStats.Defense', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableEffLabel'), field: 'augmentedStats.EffectivenessPercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableEffResLabel'), field: 'augmentedStats.EffectResistancePercent', cellRenderer: (params) => params.value == 0 ? "" : params.value},
+                {headerName: Languages.getTranslationForKey('gearTableGearScoreLabel'), field: 'wss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: Languages.getTranslationForKey('gearTableDpsScoreLabel'), field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: Languages.getTranslationForKey('gearTableSupportScoreLabel'), field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: Languages.getTranslationForKey('gearTableCombatScoreLabel'), field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
+                {headerName: Languages.getTranslationForKey('gearTableEquippedByLabel'), field: 'equippedByName', width: 120},
                 // {headerName: 'Mconf', field: 'mconfidence', width: 50},
                 // {headerName: 'Material', field: 'material', width: 120},
-                {headerName: 'Locked', field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
+                {headerName: Languages.getTranslationForKey('gearTableLockedLabel'), field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
                 // {headerName: 'Actions', field: 'id', cellRenderer: renderActions},
-                {headerName: 'Duplicate', field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
+                {headerName: Languages.getTranslationForKey('gearTableDuplicateLabel'), field: 'duplicateId', filter: 'agTextColumnFilter', hide: true},
             ],
             rowSelection: 'multiple',
             pagination: true,
@@ -61,6 +61,7 @@ module.exports = {
             // onRowSelected: onRowSelected,
         };
         let gridDiv = document.getElementById('gear-grid');
+        gridDiv.textContent = '';
         itemsGrid = new Grid(gridDiv, gridOptions);
         global.itemsGrid = itemsGrid;
         console.log("!!! itemsGrid", itemsGrid);
@@ -458,13 +459,13 @@ function renderGear(name) {
 
 function renderStat(name) {
     const statEdits = {
-        "CriticalHitDamagePercent": "Crit Dmg %",
-        "CriticalHitChancePercent": "Crit Chance %",
-        "EffectivenessPercent": "Effectiveness %",
-        "EffectResistancePercent": "Effect Resist %",
-        "AttackPercent": "Attack %",
-        "HealthPercent": "Health %",
-        "DefensePercent": "Defense %",
+        "CriticalHitDamagePercent": Languages.getTranslationForKey('statCritDmgPercentLabel'),
+        "CriticalHitChancePercent": Languages.getTranslationForKey('statCritChancePercentLabel'),
+        "EffectivenessPercent": Languages.getTranslationForKey('statEffectivenessPercentLabel'),
+        "EffectResistancePercent": Languages.getTranslationForKey('statEffectResistPercentLabel'),
+        "AttackPercent": Languages.getTranslationForKey('statAttackPercentLabel'),
+        "HealthPercent": Languages.getTranslationForKey('statHealthPercentLabel'),
+        "DefensePercent": Languages.getTranslationForKey('statDefensePercentLabel'),
     };
 
     return statEdits[name] || name;

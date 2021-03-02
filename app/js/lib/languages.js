@@ -75,6 +75,10 @@ module.exports = {
         updateHeroDropdownOptionsText('addHeroesSelector');
 
         OptimizerTab.setMouseHoverClearText(translation['translation']['app']['clearSectionText']);
+
+        OptimizerGrid.initialize();
+        ItemsGrid.initialize();
+        HeroesGrid.initialize();
     },
 
     getLocalizedHeroName: (heroNameEN) => {
@@ -83,6 +87,12 @@ module.exports = {
         }
 
         return heroNameEN;
+    },
+
+    getTranslationForKey: (key) => {
+        if (translation != null) {
+            return translation['translation']['app'][key];
+        }
     }
 }
 

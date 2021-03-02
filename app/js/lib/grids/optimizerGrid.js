@@ -219,28 +219,28 @@ function buildGrid() {
         },
 
         columnDefs: [
-            {headerName: 'sets', field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
-            {headerName: 'atk', field: 'atk', width: DIGITS_4},
-            {headerName: 'hp', field: 'hp', width: DIGITS_5},
-            {headerName: 'def', field: 'def', width: DIGITS_4},
-            {headerName: 'spd', field: 'spd', width: DIGITS_3},
-            {headerName: 'cr', field: 'cr', width: DIGITS_3},
-            {headerName: 'cd', field: 'cd', width: DIGITS_3},
-            {headerName: 'eff', field: 'eff', width: DIGITS_3},
-            {headerName: 'res', field: 'res', width: DIGITS_3},
+            {headerName: Languages.getTranslationForKey('gearSetsLabel'), field: 'sets', width: 100, cellRenderer: (params) => GridRenderer.renderSets(params.value)},
+            {headerName: Languages.getTranslationForKey('substatAtkLabel'), field: 'atk', width: DIGITS_4},
+            {headerName: Languages.getTranslationForKey('substatHpLabel'), field: 'hp', width: DIGITS_5},
+            {headerName: Languages.getTranslationForKey('substatDefLabel'), field: 'def', width: DIGITS_4},
+            {headerName: Languages.getTranslationForKey('substatSpdLabel'), field: 'spd', width: DIGITS_3},
+            {headerName: Languages.getTranslationForKey('substatCrLabel'), field: 'cr', width: DIGITS_3},
+            {headerName: Languages.getTranslationForKey('substatCdLabel'), field: 'cd', width: DIGITS_3},
+            {headerName: Languages.getTranslationForKey('substatEffLabel'), field: 'eff', width: DIGITS_3},
+            {headerName: Languages.getTranslationForKey('substatResLabel'), field: 'res', width: DIGITS_3},
             // {headerName: 'dac', field: 'dac'},
-            {headerName: 'cp', field: 'cp', width: DIGITS_6},
-            {headerName: 'hps', field: 'hpps', width: DIGITS_4},
-            {headerName: 'ehp', field: 'ehp', width: DIGITS_6},
-            {headerName: 'ehps', field: 'ehpps', width: DIGITS_5},
-            {headerName: 'dmg', field: 'dmg', width: DIGITS_5},
-            {headerName: 'dmgs', field: 'dmgps', width: DIGITS_4},
-            {headerName: 'mcd', field: 'mcdmg', width: DIGITS_5},
-            {headerName: 'mcds', field: 'mcdmgps', width: DIGITS_4},
-            {headerName: 'dmgh', field: 'dmgh', width: DIGITS_5},
-            {headerName: 'score', field: 'score', width: DIGITS_3},
-            {headerName: 'upg', field: 'upgrades', width: DIGITS_2},
-            {headerName: 'actions', field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
+            {headerName: Languages.getTranslationForKey('ratingCombatPowerLabel'), field: 'cp', width: DIGITS_6},
+            {headerName: Languages.getTranslationForKey('ratingHpSpeedLabel'), field: 'hpps', width: DIGITS_4},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpLabel'), field: 'ehp', width: DIGITS_6},
+            {headerName: Languages.getTranslationForKey('ratingEffectiveHpSpeedLabel'), field: 'ehpps', width: DIGITS_5},
+            {headerName: Languages.getTranslationForKey('ratingDmgLabel'), field: 'dmg', width: DIGITS_5},
+            {headerName: Languages.getTranslationForKey('ratingDmgSpeedLabel'), field: 'dmgps', width: DIGITS_4},
+            {headerName: Languages.getTranslationForKey('ratingMaxCritDmgLabel'), field: 'mcdmg', width: DIGITS_5},
+            {headerName: Languages.getTranslationForKey('ratingMaxCritDmgSpeedLabel'), field: 'mcdmgps', width: DIGITS_4},
+            {headerName: Languages.getTranslationForKey('ratingDmgHealthLabel'), field: 'dmgh', width: DIGITS_5},
+            {headerName: Languages.getTranslationForKey('ratingGearScoreLabel'), field: 'score', width: DIGITS_3},
+            {headerName: Languages.getTranslationForKey('ratingNumGearsToUpgradeLabel'), field: 'upgrades', width: DIGITS_2},
+            {headerName: Languages.getTranslationForKey('availableActionsLabel'), field: 'property', width: 50, sortable: false, cellRenderer: (params) => GridRenderer.renderStar(params.value)},
         ],
         rowHeight: 27,
         rowModelType: 'infinite',
@@ -259,6 +259,7 @@ function buildGrid() {
     };
 
     const gridDiv = document.getElementById('myGrid');
+    gridDiv.textContent = '';
     optimizerGrid = new Grid(gridDiv, gridOptions);
     console.log("Built optimizergrid", optimizerGrid);
 }
