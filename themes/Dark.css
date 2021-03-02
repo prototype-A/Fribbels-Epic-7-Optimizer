@@ -189,7 +189,7 @@ body {
 }
 
 /* Notification Title Text Colour */
-.awn-toast-label {
+.awn-toast-info .awn-toast-label {
   color: #1c76a6 !important;
 }
 
@@ -200,12 +200,12 @@ body {
 }
 
 /* Notification Border Colour */
-.awn-toast-wrapper {
+.awn-toast-info .awn-toast-wrapper {
   border-color: #82c7ed !important;
 }
 
 /* Notification Duration Bar Colour */
-.awn-toast-progress-bar::after {
+.awn-toast-info .awn-toast-progress-bar::after {
   background-color: #1987c2 !important;
 }
 
