@@ -30,17 +30,9 @@ module.exports = {
         document.body.querySelectorAll('[data-tl-key]').forEach((elem) => {
             let elemTag = elem.tagName.toLowerCase();
             let tlKey = elem.dataset['tlKey'];
-            let tlData = translation['translation']['app'][tlKey];
+            let tlData = module.exports.getTranslationForKey(tlKey);
 
-            const substitutes = tlData.match(/{([^}]+)}/g);
-            if (substitutes != null) {
-                for (var sub of substitutes) {
-                    let subKey = sub.substr(1, sub.length - 2);
-                    tlData = tlData.replace(sub, translation['translation']['app'][subKey]);
-                }
-            }
-
-            if (tlData != '') {
+            if (tlData != null) {
                 if (elemTag === 'input') {
                     elem.value = tlData;
                     //elem.style.width = elem.value.length + 'ch';
@@ -79,6 +71,7 @@ module.exports = {
         OptimizerGrid.initialize();
         ItemsGrid.initialize();
         HeroesGrid.initialize();
+        Tooltip.updateTooltipLocalization();
     },
 
     getLocalizedHeroName: (heroNameEN) => {
@@ -91,8 +84,30 @@ module.exports = {
 
     getTranslationForKey: (key) => {
         if (translation != null) {
-            return translation['translation']['app'][key];
+            let data = translation['translation']['app'][key];
+
+            if (typeof data !== 'undefined' || data !== undefined || data != '') {
+                const substitutes = data?.match(/{([^}]+)}/g)?.forEach((sub) => {
+                    let subKey = sub.substr(1, sub.length - 2);
+                    data = data.replace(sub, translation['translation']['app'][subKey]);
+				});
+
+                const allowedTags = [ 'p', 'b', 'i', 'u', 'br', 'code' ];
+                data = data.replace(/<([^>]+)>/g, (match, $1) => {
+                    let tag = $1.toLowerCase();
+                    if (!(allowedTags.includes(tag) || allowedTags.includes($1.substr(1, tag.length - 1)))) {
+                        return '';
+                    }
+
+                    return match;
+                });
+
+                return data;
+            }
         }
+
+        //return `Translation not found for \"${key}\"`;
+        return null;
     }
 }
 
@@ -100,10 +115,10 @@ function updateMultipleSelectLocalization(dropdownId) {
     $('#' + dropdownId).multipleSelect('refreshOptions', {
         placeholder: translation['translation']['app'][dropdownId + 'DropdownPlaceholder'],
         formatSelectAll() {
-            return translation['translation']['dropdown']['selectAllOptionLabel'];
+            return translation['translation']['app']['dropdownSelectAllOptionLabel'];
         },
         formatNoMatchesFound() {
-            return translation['translation']['dropdown']['noMatchesFoundOptionLabel'];
+            return translation['translation']['app']['dropdownNoMatchesFoundOptionLabel'];
         }
     });
 }

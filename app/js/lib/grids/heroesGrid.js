@@ -20,13 +20,11 @@ module.exports = {
         }
         const selectedNode = heroesGrid.gridOptions.api.getSelectedNodes()[0]
 
-        console.log('Heroes: ');
         for (var hero of heroes) {
             if (!hero['nameLocalized']) {
                 hero['nameLocalized'] = Languages.getLocalizedHeroName(hero['name']);
             }
         }
-		console.log(heroes);
 
         currentHeroes = heroes;
         heroesGrid.gridOptions.api.setRowData(heroes)

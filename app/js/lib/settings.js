@@ -12,8 +12,8 @@ var pathOverride;
 var excludeSelects = [];
 
 module.exports = {
-    initialize: () => {
-        module.exports.loadSettings();
+    initialize: async () => {
+        await module.exports.loadSettings();
 
         const settingsIds = [
             'settingUnlockOnUnequip',
@@ -124,7 +124,7 @@ module.exports = {
 
         if (settings.settingAppLanguage) {
             document.getElementById('settingAppLanguage').value = settings.settingAppLanguage;
-            Languages.setLanguage(settings.settingAppLanguage);
+            await Languages.setLanguage(settings.settingAppLanguage);
         }
 
         $('#selectDefaultFolderSubmitOutputText').text(settings.settingDefaultPath || defaultPath);

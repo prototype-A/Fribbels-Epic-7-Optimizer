@@ -97,7 +97,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     Subprocess.initialize(async () => {
         await Languages.initialize();
         Themes.initialize();
-        Settings.initialize();
+        await Settings.initialize();
+        Tooltip.initialize();
 		
         await HeroData.initialize();
         ZarrocConverter.initialize();
@@ -118,9 +119,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     Saves.initialize();
 
     Importer.addEventListener();
-
-    Tooltip.initialize();
-
 
     console.log("Document initialized")
 });
