@@ -59,12 +59,17 @@ img[src*='trashlight'] {
 
 
 /* Misc Edits */
-.tab-panels {
-  padding-bottom: 10px;
-}
-
 .tab-panel {
   padding: 2px 8px;
+  padding-bottom: 8px;
+}
+
+#myGrid {
+  margin-right: 3px;
+}
+
+#gridRightPanel {
+  margin-left: 3px;
 }
 
 #heroes-section .reforgeSwitch .switch {

@@ -44,11 +44,19 @@ module.exports = {
             }
 
             if (translation['styles'].hasOwnProperty(elemTag)) {
-                for (var _style of Object.keys(translation['styles'][elemTag])) {
-                    elem.style[_style] = translation['styles'][elemTag][_style];
-                }
+                Object.assign(elem.style, translation['styles'][elemTag]);
             }
         });
+
+        for (var selector of Object.keys(translation['styles'])) {
+            if (selector.startsWith('#')) {
+	            Object.assign(document.querySelector(selector).style, translation['styles'][selector]);
+            } else if (selector.startsWith('.')) {
+                document.querySelectorAll(selector).forEach((elem) => {
+                    Object.assign(elem.style, translation['styles'][selector]);
+                });
+            }
+        }
 
         updateHeroDropdownOptionsText('inputHeroAdd');
 
@@ -86,7 +94,7 @@ module.exports = {
         if (translation != null) {
             let data = translation['translation']['app'][key];
 
-            if (typeof data !== 'undefined' || data !== undefined || data != '') {
+            if (typeof data !== 'undefined' || data !== undefined || data !== '') {
                 const substitutes = data?.match(/{([^}]+)}/g)?.forEach((sub) => {
                     let subKey = sub.substr(1, sub.length - 2);
                     data = data.replace(sub, translation['translation']['app'][subKey]);

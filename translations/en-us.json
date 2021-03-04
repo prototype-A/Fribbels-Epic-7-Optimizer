@@ -2,7 +2,13 @@
     "name": "English",
     "locale": "en-US",
     "styles": {
-        "input": {
+        ".gearActionButton": {
+            "width": "126px"
+        },
+        "#selectDefaultFolderSubmit": {
+            "width": "140px"
+        },
+        "#importZarrocSaveFileSelect": {
             "width": "140px"
         }
     },
