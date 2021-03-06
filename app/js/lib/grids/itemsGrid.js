@@ -515,6 +515,8 @@ function drawPreview(item) {
 }
 
 function onRowSelected(event) {
+    $('#selectedCount').text('1');
+
     if (event.node.selected) {
         selectedCell = event.data;
         updateSelectedCount();
