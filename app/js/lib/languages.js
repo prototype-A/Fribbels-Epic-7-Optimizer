@@ -38,6 +38,8 @@ module.exports = {
                     //elem.style.width = elem.value.length + 'ch';
                 } else if (elemTag === 'optgroup') {
                     elem.label = tlData;
+                } else if (elemTag === 'p') {
+                    elem.innerHTML = parseTags(tlData);
                 } else {
                     elem.childNodes[0].nodeValue = tlData;
                 }
