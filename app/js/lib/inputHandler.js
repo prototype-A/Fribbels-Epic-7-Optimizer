@@ -27,6 +27,7 @@ global.Path = window.require('path');
 global.Files = require('./files');
 global.Constants = require('./constants');
 global.Api = require('./api');
+global.Languages = require('./languages');
 global.Dialog = require('./dialog');
 global.DataFetcher = require('./datafetcher');
 global.SpecialtyChange = require('./specialtychange');
@@ -35,9 +36,8 @@ global.Utils = require('./utils');
 global.DarkMode = require('./darkmode');
 global.GridRenderer = require('./renderer/gridRenderer');
 global.Updater = require('./updater');
-global.Settings = require('./settings');
 global.Themes = require('./themes');
-global.Languages = require('./languages');
+global.Settings = require('./settings');
 global.StatPreview = require('./statPreview');
 global.Artifact = require('./artifact');
 
@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         ItemsGrid.initialize();
         HeroesTab.initialize();
         HeroesGrid.initialize();
+        Dialog.initialize();
 
         Saves.loadAutoSave();
     });

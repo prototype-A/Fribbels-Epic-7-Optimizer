@@ -32,7 +32,7 @@ module.exports = {
             let tlKey = elem.dataset['tlKey'];
             let tlData = module.exports.getTranslationForKey(tlKey);
 
-            if (tlData != null) {
+            if (typeof tlData !== 'undefined' || tlData === undefined || tlData !== '') {
                 if (elemTag === 'input') {
                     elem.value = tlData;
                     //elem.style.width = elem.value.length + 'ch';
@@ -90,25 +90,31 @@ module.exports = {
         return heroNameEN;
     },
 
-    getTranslationForKey: (key) => {
+    getLocalizedArtifactName: (artifactNameEN) => {
+        if (translation != null) {
+            return translation['translation']['artifactNames'][artifactNameEN];
+        }
+
+        return artifactNameEN;
+    },
+
+    getTranslationForKey: (key, replacementValues) => {
         if (translation != null) {
             let data = translation['translation']['app'][key];
 
-            if (typeof data !== 'undefined' || data !== undefined || data !== '') {
+            if (typeof data !== 'undefined' || data === undefined || data !== '') {
                 const substitutes = data?.match(/{([^}]+)}/g)?.forEach((sub) => {
                     let subKey = sub.substr(1, sub.length - 2);
                     data = data.replace(sub, translation['translation']['app'][subKey]);
 				});
+                data = parseTags(data);
 
-                const allowedTags = [ 'p', 'b', 'i', 'u', 'br', 'code' ];
-                data = data.replace(/<([^>]+)>/g, (match, $1) => {
-                    let tag = $1.toLowerCase();
-                    if (!(allowedTags.includes(tag) || allowedTags.includes($1.substr(1, tag.length - 1)))) {
-                        return '';
-                    }
-
-                    return match;
-                });
+                if (replacementValues) {
+                    let index = 0;
+                    data = data.replace(/\[([^\]]+)\]/g, () => {
+                        return replacementValues[index++];
+                    });
+                }
 
                 return data;
             }
@@ -116,6 +122,19 @@ module.exports = {
 
         //return `Translation not found for \"${key}\"`;
         return null;
+    },
+
+    getAgGridLocalization: () => {
+        return {
+            noRowsToShow: module.exports.getTranslationForKey('tableNoRowsToShow'),
+            page: module.exports.getTranslationForKey('tablePage'),
+            to: module.exports.getTranslationForKey('tableTo'),
+            of: module.exports.getTranslationForKey('tableOf'),
+            nextPpage: module.exports.getTranslationForKey('tableNextPage'),
+            previousPage: module.exports.getTranslationForKey('tablePreviousPage'),
+            firstPage: module.exports.getTranslationForKey('tableFirstPage'),
+            lastPage: module.exports.getTranslationForKey('tableLastPage')
+        }
     }
 }
 
@@ -154,4 +173,17 @@ function updateSetDropdownOptionsText(dropdownId) {
     updateMultipleSelectLocalization(dropdownId, translation);
 
     $('#' + dropdownId).multipleSelect('refresh');
+}
+
+function parseTags(string) {
+    const allowedTags = [ 'p', 'b', 'i', 'u', 'br', 'code' ];
+
+    return string.replace(/<([^>]+)>/g, (match, $1) => {
+        let tag = $1.toLowerCase();
+        if (!(allowedTags.includes(tag) || allowedTags.includes($1.substr(1, tag.length - 1)))) {
+            return '';
+        }
+
+        return match;
+    });
 }

@@ -57,7 +57,7 @@ module.exports = {
 
             const existingBuild = HeroesGrid.getSelectedBuildRow();
             if (!existingBuild) {
-                Notifier.warn("Select a build to edit.");
+                Notifier.warn(Language.getTranslationFromKey('notifyWarnBuildNotSelectedForEdit'));
                 return;
             }
 
@@ -96,7 +96,7 @@ module.exports = {
             console.warn("Save as build", row.items);
 
             if (row.items.length < 6) {
-                Notifier.warn("Hero need a 6 item build before it can be saved");
+                Notifier.warn(Language.getTranslationFromKey('notifyWarnBuildNotComplete'));
                 return;
             }
 
@@ -204,7 +204,7 @@ module.exports = {
             }
 
             await Api.setBonusStats(bonusStats, row.id).then(module.exports.redraw);
-            Notifier.success("Saved bonus stats");
+            Notifier.success(Languages.getTranslationFromKey('notifyBonusStatsSaved'));
             Saves.autoSave();
         });
 
@@ -324,16 +324,16 @@ module.exports = {
 
 function showEditHeroInfoPopups(name) {
     if (name == "Eaton") {
-        Notifier.info("Eaton's 20% total Health bonus from S2 is already automatically added.")
+        Notifier.info(Languages.getTranslationFromKey('notifyEatonAdditionalStats'))
     }
     if (name == "Gunther") {
-        Notifier.info("Gunther's 75% total Attack bonus from S2 is already automatically added.")
+        Notifier.info(Languages.getTranslationFromKey('notifyGuntherAdditionalStats'))
     }
     if (name == "Lena") {
-        Notifier.info("Lena's 50% Crit Chance bonus from S2 is already automatically added.")
+        Notifier.info(Languages.getTranslationFromKey('notifyLenaAdditionalStats'))
     }
     if (name == "Apocalypse Ravi") {
-        Notifier.info("Apocalypse Ravi's 30% Crit Chance bonus from S2 is already automatically added.")
+        Notifier.info(Languages.getTranslationFromKey('notifyARaviAdditionalStats'))
     }
 }
 

@@ -86,7 +86,7 @@ module.exports = {
 async function editGear() {
     const items = ItemsGrid.getSelectedGear();
     if (!items || items.length != 1) {
-        Notifier.warn("Select one item to edit.")
+        Notifier.warn(Languages.getTranslationForKey('notifyWarnNoGearSelectedToEdit'));
         return;
     }
 
@@ -95,10 +95,10 @@ async function editGear() {
     const editedItem = await Dialog.editGearDialog(item, true, false);
     console.warn("EDITITEMS", editedItem);
 
-    ItemAugmenter.augment([editedItem])
+    ItemAugmenter.augment([editedItem]);
     await Api.editItems([editedItem]);
 
-    Notifier.success("Edited item");
+    Notifier.success(Languages.getTranslationForKey('notifyGearEdited'));
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }
@@ -106,19 +106,19 @@ async function editGear() {
 async function reforgeGear() {
     const items = ItemsGrid.getSelectedGear();
     if (!items || items.length != 1) {
-        Notifier.warn("Select one item to reforge.")
+        Notifier.warn(Languages.getTranslationForKey('notifyWarnNoGearSelectedToReforge'));
         return;
     }
 
     const item = items[0]
 
     if (item.level != 85 || item.enhance != 15) {
-        Notifier.warn("Only +15 level 85 gear can be reforged.")
+        Notifier.warn(Languages.getTranslationForKey('notifyWarnInvalidGearToReforge'));
         return;
     }
 
     if (Reforge.isGaveleets(item)) {
-        Notifier.warn("Abyss lifesteal set (Gaveleet's) cannot be reforged")
+        Notifier.warn(Languages.getTranslationForKey('notifyWarnGavaleetCannotBeReforged'));
         return;
     }
 
@@ -128,7 +128,7 @@ async function reforgeGear() {
 
     await Api.editItems([editedItem]);
 
-    Notifier.quick("Reforged item");
+    Notifier.quick(Languages.getTranslationForKey('notifyGearReforged'));
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }
@@ -137,7 +137,7 @@ async function addGear() {
     const newItem = await Dialog.editGearDialog(null, false, false);
     console.warn("NEWITEM", newItem);
 
-    Notifier.quick("Added item");
+    Notifier.quick(Languages.getTranslationForKey('notifyGearAdded'));
     module.exports.redraw(newItem);
     Saves.autoSave();
 }
@@ -145,7 +145,7 @@ async function addGear() {
 async function duplicateGear() {
     const items = ItemsGrid.getSelectedGear();
     if (!items || items.length != 1) {
-        Notifier.warn("Select one item to duplicate.")
+        Notifier.warn(Languages.getTranslationForKey('notifyWarnNoGearSelectedToDuplicate'));
         return;
     }
 
@@ -156,7 +156,7 @@ async function duplicateGear() {
 
     await Api.editItems([editedItem]);
 
-    Notifier.quick("Added item");
+    Notifier.quick(Languages.getTranslationForKey('notifyGearAdded'));
     module.exports.redraw(editedItem);
     Saves.autoSave();
 }
@@ -166,7 +166,7 @@ async function removeGear() {
 
     await Api.deleteItems(items.map(x => x.id));
 
-    Notifier.quick("Removed " + items.length + " item(s).")
+    Notifier.quick(Languages.getTranslationForKey('notifyGearRemoved', [ items.length ]));
 
     module.exports.redraw();
     Saves.autoSave();
@@ -177,7 +177,7 @@ async function unequipGear() {
 
     await Api.unequipItems(items.map(x => x.id));
 
-    Notifier.quick("Unequipped " + items.length + " item(s).")
+    Notifier.quick(Languages.getTranslationForKey('notifyGearUnequipped', [ items.length ]));
 
     module.exports.redraw();
     Saves.autoSave();
@@ -188,7 +188,7 @@ async function lockGear() {
 
     await Api.lockItems(items.map(x => x.id));
 
-    Notifier.quick("Locked " + items.length + " item(s).")
+    Notifier.quick(Languages.getTranslationForKey('notifyGearLocked', [ items.length ]));
 
     module.exports.redraw();
     Saves.autoSave();
@@ -199,7 +199,7 @@ async function unlockGear() {
 
     await Api.unlockItems(items.map(x => x.id));
 
-    Notifier.quick("Unlocked " + items.length + " item(s).")
+    Notifier.quick(Languages.getTranslationForKey('notifyGearUnlocked', [ items.length ]));
 
     module.exports.redraw();
     Saves.autoSave();

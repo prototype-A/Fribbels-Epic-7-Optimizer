@@ -15,21 +15,26 @@ const e7StatToOptimizerStat = {
     "coop": "DualAttackChancePercent"
 }
 
-const e7StatToDisplayStat = {
-    "att_rate": "% Attack",
-    "max_hp_rate": "% Health",
-    "def_rate": "% Defense",
-    "att": " Attack",
-    "max_hp": " Health",
-    "def": " Defense",
-    "speed": " Speed",
-    "res": "% Res",
-    "cri": "% Crit rate",
-    "acc": "% Eff",
-    "coop": " Dual Attack"
-}
+var e7StatToDisplayStat;
 
 module.exports = {
+
+    initialize: () => {
+        e7StatToDisplayStat = {
+            "att_rate": "% " + Languages.getTranslationForKey('statAttackLabel'),
+            "max_hp_rate": "% " + Languages.getTranslationForKey('statHealthLabel'),
+            "def_rate": "% " + Languages.getTranslationForKey('statDefenseLabel'),
+            "att": " " + Languages.getTranslationForKey('statAttackLabel'),
+            "max_hp": " " + Languages.getTranslationForKey('statHealthLabel'),
+            "def": " " + Languages.getTranslationForKey('statDefenseLabel'),
+            "speed": " " + Languages.getTranslationForKey('statSpeedLabel'),
+            "res": "% " + Languages.getTranslationForKey('statEffectResistanceLabel'),
+            "cri": "% " + Languages.getTranslationForKey('statCritChanceLabel'),
+            "acc": "% " + Languages.getTranslationForKey('statEffectivenessLabel'),
+            "coop": "% " + Languages.getTranslationForKey('statDualAttackChance')
+        }
+    },
+
     error: (text) => {
         Swal.fire({
           icon: 'error',
@@ -88,14 +93,14 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Artifact</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('artifactLabel')}</div>
                             <select id="editArtifact" class="editGearStatSelect" onchange="Dialog.changeArtifact()">
                                 ${getArtifactHtml(hero)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Level</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('artifactLevelLabel')}</div>
                             <select id="editArtifactLevel" class="editGearStatSelect">
                                 ${getArtifactEnhanceHtml(hero)}
                             </select>
@@ -104,14 +109,14 @@ module.exports = {
                         <div class="horizontalLineWithMoreSpace"></div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Imprint</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('imprintConcentrationLabel')}</div>
                             ${getImprintHtml(hero, heroInfo)}
                         </div>
 
                         <div class="horizontalLineWithMoreSpace"></div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">EE</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('exclusiveEquipmentLabel')}</div>
 
                             <select id="editEe" class="editGearStatSelect">
                                 ${getEeEnhanceHtml(hero, ee)}
@@ -121,11 +126,11 @@ module.exports = {
 
                         <div class="horizontalLineWithMoreSpace"></div>
 
-                        <p>Add any other stats not included above</p>
+                        <p>${Languages.getTranslationForKey('addAdditionalBonusStatsTitle')}</p>
                         <br>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Attack</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statAttackLabel')}</div>
                             <div class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusAttack" value="${hero.bonusAtk || 0}">
                             </div>
@@ -136,7 +141,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Defense</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statDefenseLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusDefense" value="${hero.bonusDef || 0}">
                             </span>
@@ -147,7 +152,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Health</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statHealthLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusHealth" value="${hero.bonusHp || 0}">
                             </span>
@@ -158,35 +163,35 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Speed</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statSpeedLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusSpeed" value="${hero.bonusSpeed || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Rate</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statCritChanceLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritChance" value="${hero.bonusCr || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Crit Dmg</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statCritDmgLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusCritDamage" value="${hero.bonusCd || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Eff</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statEffLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectiveness" value="${hero.bonusEff || 0}">
                             </span>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Res</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('statEffResLabel')}</div>
                             <span class="valuePadding input-holder">
                                 <input type="number" class="bonusStatInput" max="100" accuracy="1" min="0" id="editHeroBonusEffectResistance" value="${hero.bonusRes || 0}">
                             </span>
@@ -259,7 +264,7 @@ module.exports = {
                     <div class="editGearForm">
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
-                        <p>Build name</p>
+                        <p>${Languages.getTranslationForKey('editBuildNamePopupLabel')}</p>
                         <input type="text" class="bonusStatInput" id="editBuildName" value="${name ? name : ""}" autofocus="autofocus" onfocus="this.select()" style="width:200px !important">
                     </div>
                 `,
@@ -321,59 +326,59 @@ module.exports = {
                         <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/themes@4.0.1/minimal/minimal.min.css" rel="stylesheet">
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Equipped</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearEquippedToLabel')}</div>
                             <select id="editGearEquipped" class="editGearStatSelect">
                                 ${getEquippedHtml(item, heroes)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Type</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearTypeLabel')}</div>
                             <select id="editGearType" class="editGearStatSelect" onchange="Dialog.changeEditGearMainStat()">
                                 ${getGearTypeOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Set</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('gearTableSetLabel')}</div>
                             <select id="editGearSet" class="editGearStatSelect">
                                 ${getGearSetOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Reforge</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearReforgeLabel')}</div>
                             <select id="editGearMaterial" class="editGearStatSelect">
                                 ${getGearMaterialOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Rank</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('gearTableRankLabel')}</div>
                             <select id="editGearRank" class="editGearStatSelect">
                                 ${getGearRankOptionsHtml(item)}
                             </select>
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Level</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('gearTableLevelLabel')}</div>
                             <input type="number" class="editGearStatNumber" id="editGearLevel" value="${item.level}">
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Enhance</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('gearTableEnhanceLevelLabel')}</div>
                             <input type="number" class="editGearStatNumber" id="editGearEnhance" value="${item.enhance}">
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Locked</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('gearTableLockedLabel')}</div>
                             <input type="checkbox" id="editGearLocked" ${item.locked ? "checked" : ""}>
                         </div>
 
                         </br>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Main Stat</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearMainStatLabel')}</div>
                             <select id="editGearMainStatType" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.main)}
                             </select>
@@ -381,7 +386,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 1</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearSubstat1Label')}</div>
                             <select id="editGearStat1Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[0])}
                             </select>
@@ -389,7 +394,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 2</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearSubstat2Label')}</div>
                             <select id="editGearStat2Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[1])}
                             </select>
@@ -397,7 +402,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 3</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearSubstat3Label')}</div>
                             <select id="editGearStat3Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[2])}
                             </select>
@@ -405,7 +410,7 @@ module.exports = {
                         </div>
 
                         <div class="editGearFormRow">
-                            <div class="editGearStatLabel">Substat 4</div>
+                            <div class="editGearStatLabel">${Languages.getTranslationForKey('editGearSubstat4Label')}</div>
                             <select id="editGearStat4Type" class="editGearStatSelect">
                                 ${getStatOptionsHtml(item.substats[3])}
                             </select>
@@ -543,7 +548,7 @@ function getImprintHtml(hero, heroInfo) {
         }
     }
 
-    var html = `<select class="editGearStatSelect" id="editImprint"><option value="None">None</option>`;
+    var html = `<select class="editGearStatSelect" id="editImprint"><option value="None">${Languages.getTranslationForKey('dropdownNonePlaceholder')}</option>`;
 
     for (var grade of Object.keys(fixedImprintValues)) {
         html += `<option value="${fixedImprintValues[grade]}" ${hero.imprintNumber == fixedImprintValues[grade] ? "selected" : ""}>${fixedImprintValues[grade]}${displayText} - ${grade}</option>`
@@ -559,12 +564,13 @@ function getImprintHtml(hero, heroInfo) {
 
 
 function getEquippedHtml(item, heroes) {
-    var html = `<option value="None">Nobody</option>`;
+    var html = `<option value="None">${Languages.getTranslationForKey('dropdownNobodyPlaceholder')}</option>`;
 
     Utils.sortByAttribute(heroes, 'name');
 
     for (var hero of heroes) {
-        html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${hero.name}</option>`
+        let heroName = (Languages.getDefaultLanguage() === 'English') ? hero.name : Languages.getLocalizedHeroName(hero.name);
+        html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${heroName}</option>`
     }
 
     return html;
@@ -572,14 +578,15 @@ function getEquippedHtml(item, heroes) {
 
 
 function getArtifactHtml(hero) {
-    var html = `<option value="None">None</option>`;
+    var html = `<option value="None">${Languages.getTranslationForKey('dropdownNonePlaceholder')}</option>`;
 
     const artifactsJson = HeroData.getAllArtifactData();
     const artifacts = Object.values(artifactsJson);
 
     for (var artifact of artifacts) {
         // console.log(hero, artifact.name);
-        html += `<option value="${artifact.name}" ${hero.artifactName == artifact.name ? "selected" : ""}>${artifact.name}</option>`
+        let artifactName = (Languages.getDefaultLanguage() === 'English') ? artifact.name : Languages.getLocalizedArtifactName(artifact.name);
+        html += `<option value="${artifact.name}" ${hero.artifactName == artifact.name ? "selected" : ""}>${artifactName}</option>`
 
 
     }
@@ -589,7 +596,7 @@ function getArtifactHtml(hero) {
 
 
 function getArtifactEnhanceHtml(hero) {
-    var html = `<option value="None">None</option>`;
+    var html = `<option value="None">${Languages.getTranslationForKey('dropdownNonePlaceholder')}</option>`;
 
     const artifactName = hero.artifactName
     if (artifactName && artifactName != "None") {
@@ -607,7 +614,7 @@ function getArtifactEnhanceHtml(hero) {
 }
 
 function getEeEnhanceHtml(hero, ee) {
-    var html = `<option value="None">None</option>`;
+    var html = `<option value="None">${Languages.getTranslationForKey('dropdownNonePlaceholder')}</option>`;
     if (!ee) {
         return html;
     }
@@ -631,17 +638,17 @@ function getStatOptionsHtml(stat) {
     const type = stat ? stat.type : null;
     return  `
 <option value="None"></option>
-<option value="AttackPercent" ${type == "AttackPercent" ? "selected" : ""}>Attack %</option>
-<option value="Attack" ${type == "Attack" ? "selected" : ""}>Attack</option>
-<option value="HealthPercent" ${type == "HealthPercent" ? "selected" : ""}>Health %</option>
-<option value="Health" ${type == "Health" ? "selected" : ""}>Health</option>
-<option value="DefensePercent" ${type == "DefensePercent" ? "selected" : ""}>Defense %</option>
-<option value="Defense" ${type == "Defense" ? "selected" : ""}>Defense</option>
-<option value="Speed" ${type == "Speed" ? "selected" : ""}>Speed</option>
-<option value="CriticalHitChancePercent" ${type == "CriticalHitChancePercent" ? "selected" : ""}>Crit Chance</option>
-<option value="CriticalHitDamagePercent" ${type == "CriticalHitDamagePercent" ? "selected" : ""}>Crit Damage</option>
-<option value="EffectivenessPercent" ${type == "EffectivenessPercent" ? "selected" : ""}>Effectiveness</option>
-<option value="EffectResistancePercent" ${type == "EffectResistancePercent" ? "selected" : ""}>Effect Resistance</option>
+<option value="AttackPercent" ${type == "AttackPercent" ? "selected" : ""}>${Languages.getTranslationForKey('statAttackPercentLabel')}</option>
+<option value="Attack" ${type == "Attack" ? "selected" : ""}>${Languages.getTranslationForKey('statAttackLabel')}</option>
+<option value="HealthPercent" ${type == "HealthPercent" ? "selected" : ""}>${Languages.getTranslationForKey('statHealthPercentLabel')}</option>
+<option value="Health" ${type == "Health" ? "selected" : ""}>${Languages.getTranslationForKey('statHealthLabel')}</option>
+<option value="DefensePercent" ${type == "DefensePercent" ? "selected" : ""}>${Languages.getTranslationForKey('statDefensePercentLabel')}</option>
+<option value="Defense" ${type == "Defense" ? "selected" : ""}>${Languages.getTranslationForKey('statDefenseLabel')}</option>
+<option value="Speed" ${type == "Speed" ? "selected" : ""}>${Languages.getTranslationForKey('statSpeedLabel')}</option>
+<option value="CriticalHitChancePercent" ${type == "CriticalHitChancePercent" ? "selected" : ""}>${Languages.getTranslationForKey('statCritChanceLabel')}</option>
+<option value="CriticalHitDamagePercent" ${type == "CriticalHitDamagePercent" ? "selected" : ""}>${Languages.getTranslationForKey('statCritDamageLabel')}</option>
+<option value="EffectivenessPercent" ${type == "EffectivenessPercent" ? "selected" : ""}>${Languages.getTranslationForKey('statEffectivenessLabel')}</option>
+<option value="EffectResistancePercent" ${type == "EffectResistancePercent" ? "selected" : ""}>${Languages.getTranslationForKey('statEffectResistanceLabel')}</option>
 `
 }
 
@@ -649,12 +656,12 @@ function getGearTypeOptionsHtml(item) {
     const gear = item.gear;
     return  `
 <option value="None"></option>
-<option value="Weapon" ${gear == "Weapon" ? "selected" : ""}>Weapon</option>
-<option value="Helmet" ${gear == "Helmet" ? "selected" : ""}>Helmet</option>
-<option value="Armor" ${gear == "Armor" ? "selected" : ""}>Armor</option>
-<option value="Necklace" ${gear == "Necklace" ? "selected" : ""}>Necklace</option>
-<option value="Ring" ${gear == "Ring" ? "selected" : ""}>Ring</option>
-<option value="Boots" ${gear == "Boots" ? "selected" : ""}>Boots</option>
+<option value="Weapon" ${gear == "Weapon" ? "selected" : ""}>${Languages.getTranslationForKey('gearTypeWeapon')}</option>
+<option value="Helmet" ${gear == "Helmet" ? "selected" : ""}>${Languages.getTranslationForKey('gearTypeHelmet')}</option>
+<option value="Armor" ${gear == "Armor" ? "selected" : ""}>${Languages.getTranslationForKey('gearTypeArmor')}</option>
+<option value="Necklace" ${gear == "Necklace" ? "selected" : ""}>${Languages.getTranslationForKey('gearTypeNecklace')}</option>
+<option value="Ring" ${gear == "Ring" ? "selected" : ""}>${Languages.getTranslationForKey('gearTypeRing')}</option>
+<option value="Boots" ${gear == "Boots" ? "selected" : ""}>${Languages.getTranslationForKey('gearTypeBoots')}</option>
 `
 }
 
@@ -662,22 +669,22 @@ function getGearSetOptionsHtml(item) {
     const set = item.set;
     return  `
 <option value="None"></option>
-<option value="SpeedSet" ${set == "SpeedSet" ? "selected" : ""}>Speed</option>
-<option value="AttackSet" ${set == "AttackSet" ? "selected" : ""}>Attack</option>
-<option value="DestructionSet" ${set == "DestructionSet" ? "selected" : ""}>Destruction</option>
-<option value="LifestealSet" ${set == "LifestealSet" ? "selected" : ""}>Lifesteal</option>
-<option value="CounterSet" ${set == "CounterSet" ? "selected" : ""}>Counter</option>
-<option value="RageSet" ${set == "RageSet" ? "selected" : ""}>Rage</option>
-<option value="HealthSet" ${set == "HealthSet" ? "selected" : ""}>Health</option>
-<option value="DefenseSet" ${set == "DefenseSet" ? "selected" : ""}>Defense</option>
-<option value="CriticalSet" ${set == "CriticalSet" ? "selected" : ""}>Critical</option>
-<option value="HitSet" ${set == "HitSet" ? "selected" : ""}>Hit</option>
-<option value="ResistSet" ${set == "ResistSet" ? "selected" : ""}>Resist</option>
-<option value="UnitySet" ${set == "UnitySet" ? "selected" : ""}>Unity</option>
-<option value="ImmunitySet" ${set == "ImmunitySet" ? "selected" : ""}>Immunity</option>
-<option value="PenetrationSet" ${set == "PenetrationSet" ? "selected" : ""}>Penetration</option>
-<option value="InjurySet" ${set == "InjurySet" ? "selected" : ""}>Injury</option>
-<option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>Revenge</option>
+<option value="SpeedSet" ${set == "SpeedSet" ? "selected" : ""}>${Languages.getTranslationForKey('setSpeedLabel')}</option>
+<option value="AttackSet" ${set == "AttackSet" ? "selected" : ""}>${Languages.getTranslationForKey('setAttackLabel')}</option>
+<option value="DestructionSet" ${set == "DestructionSet" ? "selected" : ""}>${Languages.getTranslationForKey('setDestructionLabel')}</option>
+<option value="LifestealSet" ${set == "LifestealSet" ? "selected" : ""}>${Languages.getTranslationForKey('setLifestealLabel')}</option>
+<option value="CounterSet" ${set == "CounterSet" ? "selected" : ""}>${Languages.getTranslationForKey('setCounterLabel')}</option>
+<option value="RageSet" ${set == "RageSet" ? "selected" : ""}>${Languages.getTranslationForKey('setRageLabel')}</option>
+<option value="HealthSet" ${set == "HealthSet" ? "selected" : ""}>${Languages.getTranslationForKey('setHealthLabel')}</option>
+<option value="DefenseSet" ${set == "DefenseSet" ? "selected" : ""}>${Languages.getTranslationForKey('setDefenseLabel')}</option>
+<option value="CriticalSet" ${set == "CriticalSet" ? "selected" : ""}>${Languages.getTranslationForKey('setCriticalLabel')}</option>
+<option value="HitSet" ${set == "HitSet" ? "selected" : ""}>${Languages.getTranslationForKey('setHitLabel')}</option>
+<option value="ResistSet" ${set == "ResistSet" ? "selected" : ""}>${Languages.getTranslationForKey('setResistLabel')}</option>
+<option value="UnitySet" ${set == "UnitySet" ? "selected" : ""}>${Languages.getTranslationForKey('setUnityLabel')}</option>
+<option value="ImmunitySet" ${set == "ImmunitySet" ? "selected" : ""}>${Languages.getTranslationForKey('setImmunityLabel')}</option>
+<option value="PenetrationSet" ${set == "PenetrationSet" ? "selected" : ""}>${Languages.getTranslationForKey('setPenetrationLabel')}</option>
+<option value="InjurySet" ${set == "InjurySet" ? "selected" : ""}>${Languages.getTranslationForKey('setInjuryLabel')}</option>
+<option value="RevengeSet" ${set == "RevengeSet" ? "selected" : ""}>${Languages.getTranslationForKey('setRevengeLabel')}</option>
 `
 }
 
@@ -685,11 +692,11 @@ function getGearRankOptionsHtml(item) {
     const rank = item.rank;
     return  `
 <option value="None"></option>
-<option value="Epic" ${rank == "Epic" ? "selected" : ""}>Epic</option>
-<option value="Heroic" ${rank == "Heroic" ? "selected" : ""}>Heroic</option>
-<option value="Rare" ${rank == "Rare" ? "selected" : ""}>Rare</option>
-<option value="Good" ${rank == "Good" ? "selected" : ""}>Good</option>
-<option value="Normal" ${rank == "Normal" ? "selected" : ""}>Normal</option>
+<option value="Epic" ${rank == "Epic" ? "selected" : ""}>${Languages.getTranslationForKey('gearRankEpic')}</option>
+<option value="Heroic" ${rank == "Heroic" ? "selected" : ""}>${Languages.getTranslationForKey('gearRankHeroic')}</option>
+<option value="Rare" ${rank == "Rare" ? "selected" : ""}>${Languages.getTranslationForKey('gearRankRare')}</option>
+<option value="Good" ${rank == "Good" ? "selected" : ""}>${Languages.getTranslationForKey('gearRankGood')}</option>
+<option value="Normal" ${rank == "Normal" ? "selected" : ""}>${Languages.getTranslationForKey('gearRankNormal')}</option>
 `
 }
 
@@ -697,7 +704,7 @@ function getGearMaterialOptionsHtml(item) {
     const material = item.material;
     return  `
 <option value="None">None</option>
-<option value="Hunt" ${material == "Hunt" ? "selected" : ""}>Hunt</option>
-<option value="Conversion" ${material == "Conversion" ? "selected" : ""}>Conversion</option>
+<option value="Hunt" ${material == "Hunt" ? "selected" : ""}>${Languages.getTranslationForKey('gearReforgeTypeHunt')}</option>
+<option value="Conversion" ${material == "Conversion" ? "selected" : ""}>${Languages.getTranslationForKey('gearReforgeTypeEquipmentConversion')}</option>
 `
 }

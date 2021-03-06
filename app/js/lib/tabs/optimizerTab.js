@@ -485,7 +485,7 @@ async function editGearFromIcon(id, reforge) {
 
     ItemAugmenter.augment([editedItem])
     await Api.editItems([editedItem]);
-    Notifier.quick("Edited item");
+    Notifier.quick(Languages.getTranslationForKey('notifyGearEdited'));
 
     ItemsTab.redraw(editedItem);
     drawPreview();
@@ -500,10 +500,10 @@ async function lockGearFromIcon(id) {
 
     if (result.item.locked) {
         await Api.unlockItems([id])
-        Notifier.quick("Unlocked item");
+        Notifier.quick(Languages.getTranslationForKey('notifyGearUnlocked'));
     } else {
         await Api.lockItems([id])
-        Notifier.quick("Locked item");
+        Notifier.quick(Languages.getTranslationForKey('notifyGearLocked'));
     }
 
 
@@ -880,9 +880,9 @@ function warnParams(params) {
     &&  params.inputCdPriority == 0
     &&  params.inputEffPriority == 0
     &&  params.inputResPriority == 0) {
-        Notifier.info("No stat priority selected. For best results, use the stat priority filter.")
+        Notifier.info(Languages.getTranslationForKey('notifyUseStatPriority'));
     } else if (params.inputFilterPriority == 100) {
-        Dialog.error("Stat priority was selected but the filter is set to Top 100%. The stat priority filter is only useful when the % is not 100.")
+        Dialog.error(Languages.getTranslationForKey('popupErrorStatPriority100'));
         return true;
     } else if (params.inputFilterPriority != 100
     &&  params.inputAtkPriority == 0
@@ -893,27 +893,27 @@ function warnParams(params) {
     &&  params.inputCdPriority == 0
     &&  params.inputEffPriority == 0
     &&  params.inputResPriority == 0) {
-        Dialog.error("Top % was selected but no stat priorities are assigned. Assign stat priorities otherwise the filter will not work.")
+        Dialog.error(Languages.getTranslationForKey('popupErrorAssignStatPriorities'));
         return true;
     }
 
     if (params.inputSetsOne && params.inputSetsOne.length == 0) {
-        Notifier.info("No sets were selected. For best results, select at least one set.")
+        Notifier.info(Languages.getTranslationForKey('notifySelectGearSets'))
     }
 
     if (params.inputDefMinLimit > 10000) {
-        Dialog.error("Your minimum defense filter is over 10,000, did you mean HP?");
+        Dialog.error(Languages.getTranslationForKey('popupErrorInvalidDefenseFilter'));
         return true;
     }
 
     if (params.inputNecklaceStat && params.inputNecklaceStat.length == 0
     &&  params.inputRingStat && params.inputRingStat.length == 0
     &&  params.inputBootsStat && params.inputBootsStat.length == 0) {
-        Notifier.info("No accessory main stats were selected. For best results, use the main stat filter to narrow down the search.")
+        Notifier.info(Languages.getTranslationForKey('notifySelectAccessoryMainStats'))
     }
 
     if (permutations >= 5_000_000_000) {
-        Notifier.info("Over 5 billion permutations selected. For faster results, try applying stricter filters or using a lower Top N%.")
+        Notifier.info(Languages.getTranslationForKey('notifyLargePermutationAmount'))
     }
     return false;
 }
@@ -985,7 +985,7 @@ async function submitOptimizationRequest() {
 
         var maxResults = parseInt(document.getElementById('settingMaxResults').value || 0);
         if (result.results >= maxResults) {
-            Dialog.info('Search terminated after the result limit was exceeded, the full results are not shown. Please apply more filters to narrow your search.')
+            Dialog.info(Languages.getTranslationForKey('popupErrorResultLimitSearchTermination'));
         } else {
             $('#maxPermutationsNum').text(searchedStr);
         }
@@ -1168,22 +1168,22 @@ function readCheckbox(id) {
 function getSetFormat(sets, showError) {
     if (sets[0].length == 0) {
         if (sets[1].length > 0) {
-            if (showError) Dialog.error("Invalid sets, fill in the set filters from top to bottom.");
+            if (showError) Dialog.error(Languages.getTranslationForKey('popupErrorIncorrectSetFilterOrder'));
             throw 'Invalid Sets'
         }
         if (sets[2].length > 0) {
-            if (showError) Dialog.error("Invalid sets, fill in the set filters from top to bottom.");
+            if (showError) Dialog.error(Languages.getTranslationForKey('popupErrorIncorrectSetFilterOrder'));
             throw 'Invalid Sets'
         }
         return 0;
     }
     if (hasFourPieceSet(sets[0])) {
         if (hasTwoPieceSet(sets[0])) {
-            if (showError) Dialog.error("Invalid sets, the first set filter must be either all 4 piece or all 2 piece sets.");
+            if (showError) Dialog.error(Languages.getTranslationForKey('popupErrorInvalidSetsSelected'));
             throw 'Invalid Sets'
         }
         if (hasTwoPieceSet(sets[2])) {
-            if (showError) Dialog.error("Invalid sets, fill in the set filters from top to bottom.");
+            if (showError) Dialog.error(Languages.getTranslationForKey('popupErrorIncorrectSetFilterOrder'));
             throw 'Invalid Sets'
         }
         if (sets[1].length > 0) {
@@ -1199,7 +1199,7 @@ function getSetFormat(sets, showError) {
             return 4;
         }
         if (sets[2].length > 0) {
-            if (showError) Dialog.error("Invalid sets, fill in the set filters from top to bottom.");
+            if (showError) Dialog.error(Languages.getTranslationForKey('popupErrorIncorrectSetFilterOrder'));
             throw 'Invalid Sets'
         }
         return 3;

@@ -214,6 +214,7 @@ function buildGrid(heroes) {
         paginationPageSize: 100000,
         onRowSelected: onHeroRowSelected,
         onRowClicked: onHeroRowClick,
+        localeText: Languages.getAgGridLocalization()
     };
 
     const buildsGridOptions = {
@@ -259,6 +260,7 @@ function buildGrid(heroes) {
         maxBlocksInCache: 1,
         suppressPaginationPanel: false,
         navigateToNextCell: navigateToNextCell.bind(this),
+        localeText: Languages.getAgGridLocalization()
     };
 
     const gridDiv = document.getElementById('heroes-table');

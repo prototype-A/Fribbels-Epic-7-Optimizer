@@ -256,6 +256,7 @@ function buildGrid() {
         onCellMouseOver: cellMouseOver,
         onCellMouseOut: cellMouseOut,
         navigateToNextCell: GridRenderer.arrowKeyNavigator().bind(this),
+        localeText: Languages.getAgGridLocalization()
     };
 
     const gridDiv = document.getElementById('myGrid');

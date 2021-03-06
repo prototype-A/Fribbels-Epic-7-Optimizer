@@ -23,7 +23,7 @@ module.exports = {
             columnDefs: [
                 {headerName: Languages.getTranslationForKey('gearTableSetLabel'), field: 'set', filter: 'agTextColumnFilter', cellRenderer: (params) => renderSets(params.value)},
                 {headerName: Languages.getTranslationForKey('gearTableTypeLabel'), field: 'gear', filter: 'agTextColumnFilter', cellRenderer: (params) => renderGear(params.value)},
-                {headerName: Languages.getTranslationForKey('gearTableRankLabel'), field: 'rank'},
+                {headerName: Languages.getTranslationForKey('gearTableRankLabel'), field: 'rank', cellRenderer: (params) => renderRank(params.value)},
                 {headerName: Languages.getTranslationForKey('gearTableLevelLabel'), field: 'level', filter: 'agNumberColumnFilter'},
                 {headerName: Languages.getTranslationForKey('gearTableEnhanceLevelLabel'), field: 'enhance', width: 60, filter: 'agNumberColumnFilter'},
                 {headerName: Languages.getTranslationForKey('gearTableMainStatLabel'), field: 'main.type', filter: 'agTextColumnFilter', width: 100, cellRenderer: (params) => renderStat(params.value)},
@@ -59,6 +59,7 @@ module.exports = {
             onCellMouseOut: cellMouseOut,
             suppressScrollOnNewData: true,
             // onRowSelected: onRowSelected,
+            localeText: Languages.getAgGridLocalization()
         };
         let gridDiv = document.getElementById('gear-grid');
         gridDiv.textContent = '';
@@ -457,6 +458,10 @@ function renderGear(name) {
     return '<img class="optimizerSetIcon" src=' + Assets.getGearAsset(name) + '></img>'
 }
 
+function renderRank(name) {
+    return Languages.getTranslationForKey('gearRank' + name);
+}
+
 function renderStat(name) {
     const statEdits = {
         "CriticalHitDamagePercent": Languages.getTranslationForKey('statCritDmgPercentLabel'),
@@ -468,7 +473,7 @@ function renderStat(name) {
         "DefensePercent": Languages.getTranslationForKey('statDefensePercentLabel'),
     };
 
-    return statEdits[name] || name;
+    return statEdits[name] || Languages.getTranslationForKey('stat' + name + 'Label');
 }
 
 function updateSelectedCount() {

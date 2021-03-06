@@ -39,12 +39,13 @@ function wssToText(item) {
 
 function shortenStats(statType) {
     if (statType == "Effect Resistance")
-        return "Effect Resist"
+        return Languages.getTranslationForKey('statEffectResistLabel');
     if (statType == "Critical Hit Chance")
-        return "Crit Chance"
+        return Languages.getTranslationForKey('statCritChanceLabel');
     if (statType == "Critical Hit Damage")
-        return "Crit Damage"
-    return statType;
+        return Languages.getTranslationForKey('statCritDamageLabel');
+
+    return Languages.getTranslationForKey('stat' + statType + 'Label');
 }
 
 function getPercentageEquivalent(stat, baseStats, useReforged) {
