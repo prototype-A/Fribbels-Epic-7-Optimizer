@@ -1,3 +1,39 @@
+/* Odd-Numbered Table Rows + Text Colour */
+.ag-theme-balham .ag-row:nth-child(odd) {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Even-Numbered Table Rows + Text Colour */
+.ag-theme-balham .ag-row:nth-child(even) {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Table Row Mouse Hover */
+.ag-theme-balham .ag-row-hover:nth-child(odd),
+.ag-theme-balham .ag-row-hover:nth-child(even) {
+  background-color: #daf1ff;
+}
+
+/* Table Row Selected */
+.ag-theme-balham .ag-row-selected:nth-child(odd),
+.ag-theme-balham .ag-row-selected:nth-child(even) {
+  background-color: #b7e4ff;
+}
+
+/* Dropdown Option Selected Colour */
+.ms-drop.bottom > ul > selected,
+.ms-drop ul > li.hide-radio.selected {
+  background-color: #007bff;
+}
+
+/* Dropdown Option Hover Colour */
+.ms-drop.bottom > ul > li:hover {
+  background-color: #daf1ff;
+}
+
+
 /* Dark Icons */
 .tooltipImage {
   content:url('./../resources/app.asar/assets/tooltip.png');

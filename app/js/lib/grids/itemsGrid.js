@@ -1,7 +1,10 @@
 const stringSimilarity = require('string-similarity');
 const tinygradient = require('tinygradient');
-var gradient = tinygradient('#ffffff', '#8fed78');
-var scoreGradient = tinygradient('#ffa8a8', '#ffffe5', '#8fed78');
+const tinycolor = require('tinycolor2');
+var gradient = null;
+var scoreGradient = null
+var textColor = tinycolor('#000');
+var inverseTextColor = tinycolor('#fff');
 
 var itemsGrid;
 var currentAggregate = {};
@@ -10,6 +13,15 @@ var selectedCell = null;
 
 module.exports = {
     initialize: async () => {
+        let lowerColor = Themes.getLowerGearScoreGridGradientColor();
+        let neutralColor = Themes.getNeutralScoreGridGradientColor();
+        let higherColor = Themes.getHigherGearScoreGridGradientColor();
+
+        gradient = tinygradient(neutralColor, higherColor);
+        scoreGradient = tinygradient(lowerColor, neutralColor, higherColor);
+        textColor = tinycolor(Themes.getGridTextColor());
+        inverseTextColor = (textColor.isLight()) ? textColor.clone().darken(90) : textColor.clone().brighten(90);
+
         const getAllItemsResponse = await Api.getAllItems();
         const gridOptions = {
             defaultColDef: {
@@ -43,7 +55,7 @@ module.exports = {
                 {headerName: Languages.getTranslationForKey('gearTableDpsScoreLabel'), field: 'dpsWss', width: 50, cellStyle: scoreColumnGradient},
                 {headerName: Languages.getTranslationForKey('gearTableSupportScoreLabel'), field: 'supportWss', width: 50, cellStyle: scoreColumnGradient},
                 {headerName: Languages.getTranslationForKey('gearTableCombatScoreLabel'), field: 'combatWss', width: 50, cellStyle: scoreColumnGradient},
-                {headerName: Languages.getTranslationForKey('gearTableEquippedByLabel'), field: 'equippedByName', width: 120},
+                {headerName: Languages.getTranslationForKey('gearTableEquippedByLabel'), field: 'equippedByName', width: 120, cellRenderer: (params) => Languages.getLocalizedHeroName(params.value)},
                 // {headerName: 'Mconf', field: 'mconfidence', width: 50},
                 // {headerName: 'Material', field: 'material', width: 120},
                 {headerName: Languages.getTranslationForKey('gearTableLockedLabel'), field: 'locked', cellRenderer: (params) => params.value == true ? 'yes' : 'no'},
@@ -370,6 +382,14 @@ function renderActions(params) {
     return '<img class="optimizerSetIcon" id="item1" src=' + Assets.getSetAsset("SpeedSet") + '></img>';
 }
 
+function getContrastingTextColor(cellColor) {
+    if (cellColor.clone().darken().isLight()) {
+        return textColor;
+    }
+
+    return inverseTextColor;
+}
+
 function columnGradient(params) {
     try {
         if (!params || params.value == undefined) return;
@@ -380,16 +400,18 @@ function columnGradient(params) {
         if (!agg) return;
 
         var percent = (value) / (agg.max + 1);
-        const color = gradient.rgbAt(percent);
-
+        const bgColor = gradient.rgbAt(percent);
+        const cellTextColor = getContrastingTextColor(bgColor);
+/*
         if (percent == 0) {
             return {
                 backgroundColor: 'ffffff00'
             }
         }
-
+*/
         return {
-            backgroundColor: color.toHexString()
+            backgroundColor: bgColor.toHexString(),
+            color: cellTextColor.toHexString()
         };
     } catch (e) {console.error(e)}
 
@@ -406,10 +428,12 @@ function scoreColumnGradient(params) {
         percent = Math.min(1, percent);
         percent = Math.max(0, percent);
 
-        const color = scoreGradient.rgbAt(percent);
+        const bgColor = scoreGradient.rgbAt(percent);
+        const cellTextColor = getContrastingTextColor(bgColor);
 
         return {
-            backgroundColor: color.toHexString()
+            backgroundColor: bgColor.toHexString(),
+            color: cellTextColor.toHexString()
         };
     } catch (e) {console.error(e)}
 }

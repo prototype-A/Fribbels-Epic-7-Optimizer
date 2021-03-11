@@ -14,7 +14,7 @@ module.exports = {
         for (var name of names) {
             const hero = allHeroData[name];
             const option = document.createElement('option');
-            option.innerHTML = name;
+            option.innerHTML = Languages.getLocalizedHeroName(name);
             option.value = name;
             selector.add(option);
         }

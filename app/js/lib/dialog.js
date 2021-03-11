@@ -569,7 +569,7 @@ function getEquippedHtml(item, heroes) {
     Utils.sortByAttribute(heroes, 'name');
 
     for (var hero of heroes) {
-        let heroName = (Languages.getDefaultLanguage() === 'English') ? hero.name : Languages.getLocalizedHeroName(hero.name);
+        let heroName = (Languages.getLanguage() === Languages.getDefaultLanguage()) ? hero.name : Languages.getLocalizedHeroName(hero.name);
         html += `<option value="${hero.id}" ${hero.id == item.equippedById ? "selected" : ""}>${heroName}</option>`
     }
 
@@ -585,7 +585,7 @@ function getArtifactHtml(hero) {
 
     for (var artifact of artifacts) {
         // console.log(hero, artifact.name);
-        let artifactName = (Languages.getDefaultLanguage() === 'English') ? artifact.name : Languages.getLocalizedArtifactName(artifact.name);
+        let artifactName = (Languages.getLanguage() === Languages.getDefaultLanguage()) ? artifact.name : Languages.getLocalizedArtifactName(artifact.name);
         html += `<option value="${artifact.name}" ${hero.artifactName == artifact.name ? "selected" : ""}>${artifactName}</option>`
 
 

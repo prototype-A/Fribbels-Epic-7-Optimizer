@@ -13,8 +13,6 @@ var excludeSelects = [];
 
 module.exports = {
     initialize: async () => {
-        await module.exports.loadSettings();
-
         const settingsIds = [
             'settingUnlockOnUnequip',
             'settingRageSet',
@@ -64,6 +62,7 @@ module.exports = {
         for (var themeName of themeList) {
             let themeOption = document.createElement('option')
             themeOption.text = themeName;
+            themeOption.value = themeName;
             document.getElementById(settingsIds[3]).add(themeOption);
         }
 
@@ -71,8 +70,11 @@ module.exports = {
         for (var langName of langList) {
             let langOption = document.createElement('option')
             langOption.text = langName;
+            langOption.value = langName;
             document.getElementById(settingsIds[4]).add(langOption);
         }
+		
+        await module.exports.loadSettings();
     },
 
     getDefaultPath: () => {
@@ -119,7 +121,7 @@ module.exports = {
 
         if (settings.settingAppTheme) {
             document.getElementById('settingAppTheme').value = settings.settingAppTheme;
-            Themes.setTheme(settings.settingAppTheme);
+            await Themes.setTheme(settings.settingAppTheme);
         }
 
         if (settings.settingAppLanguage) {

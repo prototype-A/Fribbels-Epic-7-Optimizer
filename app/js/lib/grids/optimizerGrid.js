@@ -1,9 +1,8 @@
 const tinygradient = require('tinygradient');
-var gradient = tinygradient([
-    {color: '#F5A191', pos: 0},
-    {color: '#ffffe5', pos: 0.5},
-    {color: '#77e246', pos: 1}
-]);
+const tinycolor = require('tinycolor2');
+var gradient = null;
+var textColor = tinycolor('#000');
+var inverseTextColor = tinycolor('#fff');
 
 optimizerGrid = null;
 var currentSortModel;
@@ -23,6 +22,14 @@ var pinnedRow = {
 module.exports = {
 
     initialize: () => {
+        gradient = tinygradient([
+            {color: Themes.getLowerOptimizerScoreGridGradientColor(), pos: 0},
+            {color: Themes.getNeutralScoreGridGradientColor(), pos: 0.5},
+            {color: Themes.getHigherOptimizerScoreGridGradientColor(), pos: 1}
+        ]);
+        textColor = tinycolor(Themes.getGridTextColor());
+        inverseTextcolor = (textColor.isLight()) ? textColor.clone().darken(90) : textColor.clone().brighten(90);
+
         buildGrid();
     },
 
@@ -265,6 +272,13 @@ function buildGrid() {
     console.log("Built optimizergrid", optimizerGrid);
 }
 
+function getContrastingTextColor(cellColor) {
+    if (cellColor.clone().darken().isLight()) {
+        return textColor;
+    }
+
+    return inverseTextColor;
+}
 
 function columnGradient(params) {
     try {
@@ -278,13 +292,15 @@ function columnGradient(params) {
         var percent = agg.max == agg.min ? 1 : (value - agg.min) / (agg.max - agg.min);
         percent = Math.min(1, Math.max(0, percent))
 
-        var color = gradient.rgbAt(percent);
+        var bgColor = gradient.rgbAt(percent);
         if (agg.min == 0 && agg.max == 0) {
-            color = gradient.rgbAt(0.5)
+            bgColor = gradient.rgbAt(0.5)
         }
+		const cellTextColor = getContrastingTextColor(bgColor);
 
         return {
-            backgroundColor: color.toHexString()
+            backgroundColor: bgColor.toHexString(),
+            color: cellTextColor.toHexString()
         };
     } catch (e) {console.error(e)}
 }

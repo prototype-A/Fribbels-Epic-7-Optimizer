@@ -112,15 +112,15 @@ body {
   color: #000;
 }
 
-/* Table Row Selected */
-.ag-theme-balham .ag-row-selected:nth-child(odd),
-.ag-theme-balham .ag-row-selected:nth-child(even) {
-  background-color: #888;
-}
-
 /* Table Row Mouse Hover */
 .ag-theme-balham .ag-row-hover:nth-child(odd),
 .ag-theme-balham .ag-row-hover:nth-child(even) {
+  background-color: #888;
+}
+
+/* Table Row Selected */
+.ag-theme-balham .ag-row-selected:nth-child(odd),
+.ag-theme-balham .ag-row-selected:nth-child(even) {
   background-color: #aaa;
 }
 

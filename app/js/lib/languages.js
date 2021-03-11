@@ -24,6 +24,14 @@ module.exports = {
         return Object.keys(translationFiles);
     },
 
+    getLanguage: () => {
+        if (translation != null) {
+            return translation['name'];
+        }
+
+        return module.exports.getDefaultLanguage();
+    },
+
     setLanguage: async (lang) => {
         translation = JSON.parse(await Files.readFile(translationsPath + translationFiles[lang]));
 
@@ -86,7 +94,10 @@ module.exports = {
 
     getLocalizedHeroName: (heroNameEN) => {
         if (translation != null) {
-            return translation['translation']['heroNames'][heroNameEN];
+            let heroName = translation['translation']['heroNames'][heroNameEN];
+            if (heroName) {
+                return heroName;
+            }
         }
 
         return heroNameEN;
@@ -94,7 +105,10 @@ module.exports = {
 
     getLocalizedArtifactName: (artifactNameEN) => {
         if (translation != null) {
-            return translation['translation']['artifactNames'][artifactNameEN];
+            let artifactName = translation['translation']['artifactNames'][artifactNameEN];
+            if (artifactName) {
+                return artifactName;
+            }
         }
 
         return artifactNameEN;
